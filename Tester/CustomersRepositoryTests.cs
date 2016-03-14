@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using EntityFramework_Reverse_POCO_Generator;
+﻿using EntityFramework_Reverse_POCO_Generator;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 using Tester.BusinessLogic;
 
 namespace Tester
@@ -122,6 +122,7 @@ namespace Tester
             Assert.IsNull(customer3);
         }
 
+#if false
         [Test]
         public void Insert_and_delete_TEST_record_succesfully_via_Find()
         {
@@ -149,5 +150,6 @@ namespace Tester
             Assert.AreEqual(customer.CompanyName, customer2.CompanyName);
             Assert.IsNull(customer3);
         }
+#endif
     }
 }

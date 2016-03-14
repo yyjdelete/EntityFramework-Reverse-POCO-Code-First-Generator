@@ -17,8 +17,17 @@ fileManager.StartHeader();
 // TargetFrameworkVersion = <#=TargetFrameworkVersion #>
 #pragma warning disable 1591    //  Ignore "Missing XML Comment" warning
 
+using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq.Expressions;
+
 namespace <#= Namespace #>
 {
+<# if (!IsSupportedFrameworkVersion("4.51")) { #>
+#error EF7 is not supported when TargetFrameworkVersion < 4.51
+<# } #>
 <#
 var usingsContext = new List<string>();
 var usingsAll = new List<string>();
@@ -72,7 +81,7 @@ foreach(var usingStatement in usingsAll.Distinct().OrderBy(x => x)) { #>
 foreach (Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-        System.Data.Entity.DbSet<<#=tbl.NameHumanCase #>> <#=Inflector.MakePlural(tbl.NameHumanCase) #> { get; set; }<#if (IncludeComments)
+        Microsoft.Data.Entity.DbSet<<#=tbl.NameHumanCase #>> <#=Inflector.MakePlural(tbl.NameHumanCase) #> { get; set; }<#if (IncludeComments)
 { #> // <#=tbl.Name #>
 <# }
 else
@@ -86,9 +95,10 @@ else
         <#=s #>
 <# } #>
         int SaveChanges();
+        int SaveChanges(bool acceptAllChangesOnSuccess);
 <# if (IsSupportedFrameworkVersion("4.5")) { #>
-        System.Threading.Tasks.Task<int> SaveChangesAsync();
-        System.Threading.Tasks.Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 <# } #>
 <# if (storedProcs.Any()) { #>
         
@@ -177,35 +187,55 @@ foreach(var usingStatement in usingsContext.Distinct().OrderBy(x => x)) { #>
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-        public System.Data.Entity.DbSet<<#=tbl.NameHumanCase#>> <#=Inflector.MakePlural(tbl.NameHumanCase)#> { get; set; }<#if(IncludeComments){#> // <#=tbl.Name#>
+        public Microsoft.Data.Entity.DbSet<<#=tbl.NameHumanCase#>> <#=Inflector.MakePlural(tbl.NameHumanCase)#> { get; set; }<#if(IncludeComments){#> // <#=tbl.Name#>
 <# } else { #>
 
 <# } #>
 <# } #>
-        
+
+#if false
         static <#=DbContextName#>()
         {
 <#if(string.IsNullOrWhiteSpace(MigrationConfigurationFileName)) {#>
-            System.Data.Entity.Database.SetInitializer<<#=DbContextName#>>(null);
+            Microsoft.Data.Entity.Database.SetInitializer<<#=DbContextName#>>(null);
 <#} else {#>
-            System.Data.Entity.Database.SetInitializer(new <#=MigrationStrategy#><<#=DbContextName#><#if (MigrationStrategy == "MigrateDatabaseToLatestVersion"){#>, <#=MigrationConfigurationFileName#><#}#>>());
+            Microsoft.Data.Entity.Database.SetInitializer(new <#=MigrationStrategy#><<#=DbContextName#><#if (MigrationStrategy == "MigrateDatabaseToLatestVersion"){#>, <#=MigrationConfigurationFileName#><#}#>>());
 <#}#>
         }
+#endif
 
         public <#=DbContextName#>()
-            : base("Name=<#=ConnectionStringName#>")
         {
+<#if(!string.IsNullOrWhiteSpace(MigrationConfigurationFileName)) {#>
+            //MigrationStrategy = "MigrateDatabaseToLatestVersion"; // MigrateDatabaseToLatestVersion, CreateDatabaseIfNotExists or DropCreateDatabaseIfModelChanges
+<#switch(MigrationStrategy){
+case "MigrateDatabaseToLatestVersion":
+#>            Database.Migrate();
+<#break;
+case "CreateDatabaseIfNotExists":
+#>            Database.EnsureCreated();
+<#break;
+case "DropCreateDatabaseIfModelChanges":
+#>            Database.EnsureDropped();
+            Database.EnsureCreated();
+<#break;
+#>
+
+<#}#>
+            //Microsoft.Data.Entity.Database.SetInitializer(new <#=MigrationStrategy#><<#=DbContextName#><#if (MigrationStrategy == "MigrateDatabaseToLatestVersion"){#>, <#=MigrationConfigurationFileName#><#}#>>());
+<#}#>
 <#if(MakeClassesPartial) {#>            InitializePartial();
 <#}#>
         }
 
+#if false
         public <#=DbContextName#>(string connectionString) : base(connectionString)
         {
 <#if(MakeClassesPartial) {#>            InitializePartial();
 <#}#>
         }
 
-        public <#=DbContextName#>(string connectionString, System.Data.Entity.Infrastructure.DbCompiledModel model) : base(connectionString, model)
+        public <#=DbContextName#>(string connectionString, Microsoft.Data.Entity.Infrastructure.DbCompiledModel model) : base(connectionString, model)
         {
 <#if(MakeClassesPartial) {#>            InitializePartial();
 <#}#>
@@ -215,6 +245,7 @@ foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey
         {
             base.Dispose(disposing);
         }
+#endif
 
 <#if(!IsSqlCe){ #>
         public bool IsSqlParameterNull(System.Data.SqlClient.SqlParameter param)
@@ -227,22 +258,24 @@ foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey
         }
 
 <#}#>
-        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(Microsoft.Data.Entity.ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 <# if(storedProcs.Any() && IncludeTableValuedFunctions)
 { #>
-
+#warning CodeFirstStoreFunctions is not support in EF7 at the time
+#if false
             modelBuilder.Conventions.Add(new CodeFirstStoreFunctions.FunctionsConvention<<#=DbContextName#>>("dbo"));
 <#      foreach (StoredProcedure sp in storedProcs.Where(s => s.IsTVF)){#>
             modelBuilder.ComplexType<<#=WriteStoredProcReturnModelName(sp)#>>();
-<# } } #>
-
+<# } #>
+#endif
+<# } #>
 <#
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-            modelBuilder.Configurations.Add(new <#=tbl.NameHumanCase + ConfigurationClassName#>());
+            modelBuilder.Add(new <#=tbl.NameHumanCase + ConfigurationClassName#>());
 <# } #>
 <#if(MakeClassesPartial) {#>
 
@@ -250,20 +283,20 @@ foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey
 <#}#>
         }
 
-        public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
+        public static Microsoft.Data.Entity.ModelBuilder CreateModel(Microsoft.Data.Entity.ModelBuilder modelBuilder, string schema)
         {
 <#
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-            modelBuilder.Configurations.Add(new <#=tbl.NameHumanCase + ConfigurationClassName#>(schema));
+            modelBuilder.Add(new <#=tbl.NameHumanCase + ConfigurationClassName#>(), schema);
 <# } #>
             return modelBuilder;
         }
 <#if(MakeClassesPartial) {#>
 
         partial void InitializePartial();
-        partial void OnModelCreatingPartial(System.Data.Entity.DbModelBuilder modelBuilder);
+        partial void OnModelCreatingPartial(Microsoft.Data.Entity.ModelBuilder modelBuilder);
 <#}#>
 <# if (storedProcs.Any())
 { #>
@@ -295,7 +328,9 @@ foreach (StoredProcedure sp in storedProcs.Where(s => !s.IsTVF))
         {
             var exec = string.Format("EXEC @procResult = [{0}].[{1}] {2}", sp.Schema, sp.Name,
                 WriteStoredProcFunctionSqlAtParams(sp)); #>
-            var procResultData = Database.SqlQuery<<#= spReturnClassName #>>("<#= exec #>", <#= WriteStoredProcFunctionSqlParameterAnonymousArray(sp) #>).ToList();
+#warning I know it doesn't work.
+            //var procResultData = Database.SqlQuery<<#= spReturnClassName #>>("<#= exec #>", <#= WriteStoredProcFunctionSqlParameterAnonymousArray(sp) #>).ToList();
+            var procResultData = this.Set<<#= spReturnClassName #>>().FromSql("<#= exec #>", <#= WriteStoredProcFunctionSqlParameterAnonymousArray(sp) #>).ToList();
 <#= WriteStoredProcFunctionSetSqlParameters(sp, false) #>
             procResult = (int) procResultParam.Value;
 <# }
@@ -316,7 +351,7 @@ foreach (StoredProcedure sp in storedProcs.Where(s => !s.IsTVF))
             {
                 Database.Connection.Open();
                 var reader = cmd.ExecuteReader();
-                var objectContext = ((System.Data.Entity.Infrastructure.IObjectContextAdapter) this).ObjectContext;
+                var objectContext = ((Microsoft.Data.Entity.Infrastructure.IObjectContextAdapter) this).ObjectContext;
 
 <# int n = 0;
             var returnModelCount = sp.ReturnModels.Count;
@@ -361,12 +396,12 @@ if (IncludeTableValuedFunctions)
             string spExecName = WriteStoredProcFunctionName(sp);
             string spReturnClassName = WriteStoredProcReturnModelName(sp);
 #>
-        [System.Data.Entity.DbFunction("<#=DbContextName#>", "<#=sp.Name#>")]
+        [Microsoft.Data.Entity.DbFunction("<#=DbContextName#>", "<#=sp.Name#>")]
         [CodeFirstStoreFunctions.DbFunctionDetails(DatabaseSchema = "<#=sp.Schema#>")]
         public IQueryable<<#= spReturnClassName #>> <#= spExecName #>(<#=WriteStoredProcFunctionParams(sp, false)#>)
         {
 <#= WriteTableValuedFunctionDeclareSqlParameter(sp) #> 
-            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)this).ObjectContext.CreateQuery<<#=spReturnClassName#>>("[<#=DbContextName#>].[<#=sp.Name#>](<#= WriteStoredProcFunctionSqlAtParams(sp) #>)", <#= WriteTableValuedFunctionSqlParameterAnonymousArray(sp) #>);
+            return ((Microsoft.Data.Entity.Infrastructure.IObjectContextAdapter)this).ObjectContext.CreateQuery<<#=spReturnClassName#>>("[<#=DbContextName#>].[<#=sp.Name#>](<#= WriteStoredProcFunctionSqlAtParams(sp) #>)", <#= WriteTableValuedFunctionSqlParameterAnonymousArray(sp) #>);
         }
 
 <# } } }
@@ -388,7 +423,7 @@ if (IncludeTableValuedFunctions)
 foreach (Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-        public System.Data.Entity.DbSet<<#=tbl.NameHumanCase #>> <#=Inflector.MakePlural(tbl.NameHumanCase) #> { get; set; }
+        public Microsoft.Data.Entity.DbSet<<#=tbl.NameHumanCase #>> <#=Inflector.MakePlural(tbl.NameHumanCase) #> { get; set; }
 <# } #>
 
         public Fake<#=DbContextName #>()
@@ -407,21 +442,24 @@ foreach (Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKe
         public int SaveChangesCount { get; private set; } 
         public int SaveChanges()
         {
+            return SaveChanges(true);
+        }
+        public int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
             ++SaveChangesCount;
             return 1;
         }
 <# if (IsSupportedFrameworkVersion("4.5")) { #>
 
-        public System.Threading.Tasks.Task<int> SaveChangesAsync()
-        {
-            ++SaveChangesCount;
-            return System.Threading.Tasks.Task<int>.Factory.StartNew(() => 1);
-        }
-
-        public System.Threading.Tasks.Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken)
+        public System.Threading.Tasks.Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             ++SaveChangesCount;
             return System.Threading.Tasks.Task<int>.Factory.StartNew(() => 1, cancellationToken);
+        }
+
+        public System.Threading.Tasks.Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            return SaveChangesAsync(true, cancellationToken);
         }
 <# } #>
 <#if(MakeClassesPartial) {#>
@@ -479,7 +517,7 @@ if (IncludeTableValuedFunctions)
         string spExecNamespTvf = WriteStoredProcFunctionName(spTvf);
         string spReturnClassName = WriteStoredProcReturnModelName(spTvf);
 #>
-        [System.Data.Entity.DbFunction("<#=DbContextName#>", "<#=spTvf.Name#>")]
+        [Microsoft.Data.Entity.DbFunction("<#=DbContextName#>", "<#=spTvf.Name#>")]
         public IQueryable<<#= spReturnClassName #>> <#= spExecNamespTvf #>(<#=WriteStoredProcFunctionParams(spTvf, false)#>)
         {
             return new System.Collections.Generic.List<<#= spReturnClassName #>>().AsQueryable();
@@ -513,8 +551,9 @@ if (IncludeTableValuedFunctions)
     //      }
     //      Read more about it here: https://msdn.microsoft.com/en-us/data/dn314431.aspx
     <#= CodeGeneratedAttribute #>
-    public <# if(MakeClassesPartial) { #>partial <# } #>class FakeDbSet<TEntity> : System.Data.Entity.DbSet<TEntity>, IQueryable, System.Collections.Generic.IEnumerable<TEntity><# if (IsSupportedFrameworkVersion("4.5")) { #>, System.Data.Entity.Infrastructure.IDbAsyncEnumerable<TEntity><# } #> where TEntity : class 
+    public <# if(MakeClassesPartial) { #>partial <# } #>class FakeDbSet<TEntity> : Microsoft.Data.Entity.DbSet<TEntity>, IQueryable, System.Collections.Generic.IEnumerable<TEntity><# if (IsSupportedFrameworkVersion("4.5")) { #>, Microsoft.Data.Entity.Query.Internal.IAsyncEnumerableAccessor<TEntity><# } #>, Microsoft.Data.Entity.Infrastructure.IInfrastructure<IServiceProvider> where TEntity : class 
     { 
+#warning This won't works.
         private readonly System.Reflection.PropertyInfo[] _primaryKeys;
         private readonly System.Collections.ObjectModel.ObservableCollection<TEntity> _data;
         private readonly IQueryable _query;
@@ -538,92 +577,24 @@ if (IncludeTableValuedFunctions)
             InitializePartial();
 <#}#>        }
 
-        public override TEntity Find(params object[] keyValues)
+        System.Collections.Generic.IAsyncEnumerable<TEntity> Microsoft.Data.Entity.Query.Internal.IAsyncEnumerableAccessor<TEntity>.AsyncEnumerable
         {
-            if (_primaryKeys == null)
-                throw new System.ArgumentException("No primary keys defined");
-            if (keyValues.Length != _primaryKeys.Length)
-                throw new System.ArgumentException("Incorrect number of keys passed to Find method");
-
-            var keyQuery = this.AsQueryable();
-            keyQuery = keyValues
-                .Select((t, i) => i)
-                .Aggregate(keyQuery,
-                    (current, x) =>
-                        current.Where(entity => _primaryKeys[x].GetValue(entity, null).Equals(keyValues[x])));
-
-            return keyQuery.SingleOrDefault();
-        }
-<# if (IsSupportedFrameworkVersion("4.5")) { #>
-
-        public override System.Threading.Tasks.Task<TEntity> FindAsync(System.Threading.CancellationToken cancellationToken, params object[] keyValues)
-        {
-            return System.Threading.Tasks.Task<TEntity>.Factory.StartNew(() => Find(keyValues), cancellationToken);
-        }
-
-        public override System.Threading.Tasks.Task<TEntity> FindAsync(params object[] keyValues)
-        {
-            return System.Threading.Tasks.Task<TEntity>.Factory.StartNew(() => Find(keyValues));
-        }
-<#}#>
-
-        public override System.Collections.Generic.IEnumerable<TEntity> AddRange(System.Collections.Generic.IEnumerable<TEntity> entities)
-        {
-            if (entities == null) throw new System.ArgumentNullException("entities");
-            var items = entities.ToList();
-            foreach (var entity in items)
+            get
             {
-                _data.Add(entity);
+                return new FakeDbAsyncEnumerable<TEntity>(_data);
             }
-            return items;
         }
-        
-        public override TEntity Add(TEntity item) 
-        {
-            if (item == null) throw new System.ArgumentNullException("item");
-            _data.Add(item); 
-            return item; 
-        } 
- 
-        public override TEntity Remove(TEntity item) 
-        {
-            if (item == null) throw new System.ArgumentNullException("item");
-            _data.Remove(item); 
-            return item; 
-        } 
- 
-        public override TEntity Attach(TEntity item) 
-        {
-            if (item == null) throw new System.ArgumentNullException("item");
-            _data.Add(item); 
-            return item; 
-        } 
- 
-        public override TEntity Create() 
-        { 
-            return System.Activator.CreateInstance<TEntity>(); 
-        } 
- 
-        public override TDerivedEntity Create<TDerivedEntity>() 
-        { 
-            return System.Activator.CreateInstance<TDerivedEntity>(); 
-        } 
- 
-        public override System.Collections.ObjectModel.ObservableCollection<TEntity> Local 
-        { 
-            get { return _data; } 
-        } 
- 
+
         System.Type IQueryable.ElementType
-        { 
-            get { return _query.ElementType; } 
-        } 
- 
-        System.Linq.Expressions.Expression IQueryable.Expression 
-        { 
-            get { return _query.Expression; } 
-        } 
- 
+        {
+            get { return _query.ElementType; }
+        }
+
+        System.Linq.Expressions.Expression IQueryable.Expression
+        {
+            get { return _query.Expression; }
+        }
+
         IQueryProvider IQueryable.Provider 
         { 
 <# if (IsSupportedFrameworkVersion("4.5")) { #>
@@ -632,23 +603,105 @@ if (IncludeTableValuedFunctions)
             get { return _query.Provider; } 
 <# } #>
         } 
- 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() 
-        { 
-            return _data.GetEnumerator(); 
-        } 
- 
-        System.Collections.Generic.IEnumerator<TEntity> System.Collections.Generic.IEnumerable<TEntity>.GetEnumerator() 
-        { 
-            return _data.GetEnumerator(); 
-        } 
-<# if (IsSupportedFrameworkVersion("4.5")) { #>
- 
-        System.Data.Entity.Infrastructure.IDbAsyncEnumerator<TEntity> System.Data.Entity.Infrastructure.IDbAsyncEnumerable<TEntity>.GetAsyncEnumerator() 
-        { 
-            return new FakeDbAsyncEnumerator<TEntity>(_data.GetEnumerator()); 
+
+        IServiceProvider Microsoft.Data.Entity.Infrastructure.IInfrastructure<IServiceProvider>.Instance
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
-<# } #>
+
+        public override Microsoft.Data.Entity.ChangeTracking.EntityEntry<TEntity> Add(TEntity entity, GraphBehavior behavior = GraphBehavior.IncludeDependents)
+        {
+            if (entity == null) throw new System.ArgumentNullException("entity");
+            _data.Add(entity);
+            return base.Add(entity, behavior);
+        }
+
+        public override void AddRange(params TEntity[] entities)
+        {
+            if (entities == null) throw new System.ArgumentNullException("entities");
+            foreach (var entity in entities)
+            {
+                _data.Add(entity);
+            }
+        }
+
+        public override void AddRange(System.Collections.Generic.IEnumerable<TEntity> entities, GraphBehavior behavior = GraphBehavior.IncludeDependents)
+        {
+            if (entities == null) throw new System.ArgumentNullException("entities");
+            var items = entities.ToList();
+            foreach (var entity in items)
+            {
+                _data.Add(entity);
+            }
+        }
+
+        public override Microsoft.Data.Entity.ChangeTracking.EntityEntry<TEntity> Attach(TEntity entity, GraphBehavior behavior = GraphBehavior.IncludeDependents)
+        {
+            return base.Attach(entity, behavior);
+        }
+
+        public override void AttachRange(System.Collections.Generic.IEnumerable<TEntity> entities, GraphBehavior behavior = GraphBehavior.IncludeDependents)
+        {
+            base.AttachRange(entities, behavior);
+        }
+
+        public override void AttachRange(params TEntity[] entities)
+        {
+            base.AttachRange(entities);
+        }
+
+        public override Microsoft.Data.Entity.ChangeTracking.EntityEntry<TEntity> Remove(TEntity entity)
+        {
+            if (entity == null) throw new System.ArgumentNullException("entity");
+            _data.Remove(entity);
+            return base.Remove(entity);
+        }
+
+        public override void RemoveRange(System.Collections.Generic.IEnumerable<TEntity> entities)
+        {
+            if (entities == null) throw new System.ArgumentNullException("entities");
+            var items = entities.ToList();
+            foreach (var entity in items)
+            {
+                _data.Remove(entity);
+            }
+        }
+
+        public override void RemoveRange(params TEntity[] entities)
+        {
+            if (entities == null) throw new System.ArgumentNullException("entities");
+            foreach (var entity in entities)
+            {
+                _data.Remove(entity);
+            }
+        }
+
+        public override Microsoft.Data.Entity.ChangeTracking.EntityEntry<TEntity> Update(TEntity entity, GraphBehavior behavior = GraphBehavior.IncludeDependents)
+        {
+            return base.Update(entity, behavior);
+        }
+        public override void UpdateRange(System.Collections.Generic.IEnumerable<TEntity> entities, GraphBehavior behavior = GraphBehavior.IncludeDependents)
+        {
+            base.UpdateRange(entities, behavior);
+        }
+
+        public override void UpdateRange(params TEntity[] entities)
+        {
+            base.UpdateRange(entities);
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return _data.GetEnumerator();
+        }
+
+        System.Collections.Generic.IEnumerator<TEntity> System.Collections.Generic.IEnumerable<TEntity>.GetEnumerator()
+        {
+            return _data.GetEnumerator();
+        }
 <#if(MakeClassesPartial) {#>
 
         partial void InitializePartial();
@@ -656,7 +709,7 @@ if (IncludeTableValuedFunctions)
 <# if (IsSupportedFrameworkVersion("4.5"))
 { #>
  
-    public class FakeDbAsyncQueryProvider<TEntity> : System.Data.Entity.Infrastructure.IDbAsyncQueryProvider 
+    public class FakeDbAsyncQueryProvider<TEntity> : Microsoft.Data.Entity.Query.Internal.IAsyncQueryProvider 
     { 
         private readonly IQueryProvider _inner; 
  
@@ -685,18 +738,18 @@ if (IncludeTableValuedFunctions)
             return _inner.Execute<TResult>(expression); 
         } 
  
-        public System.Threading.Tasks.Task<object> ExecuteAsync(System.Linq.Expressions.Expression expression, System.Threading.CancellationToken cancellationToken) 
-        { 
-            return System.Threading.Tasks.Task.FromResult(Execute(expression)); 
-        } 
- 
         public System.Threading.Tasks.Task<TResult> ExecuteAsync<TResult>(System.Linq.Expressions.Expression expression, System.Threading.CancellationToken cancellationToken) 
         { 
             return System.Threading.Tasks.Task.FromResult(Execute<TResult>(expression)); 
-        } 
+        }
+ 
+        public System.Collections.Generic.IAsyncEnumerable<TResult> ExecuteAsync<TResult>(System.Linq.Expressions.Expression expression)
+        {
+            return new FakeDbAsyncEnumerable<TResult>(CreateQuery<TResult>(expression));
+        }
     } 
  
-    public class FakeDbAsyncEnumerable<T> : EnumerableQuery<T>, System.Data.Entity.Infrastructure.IDbAsyncEnumerable<T>, IQueryable<T> 
+    public class FakeDbAsyncEnumerable<T> : EnumerableQuery<T>, System.Collections.Generic.IAsyncEnumerable<T>, IQueryable<T> 
     { 
         public FakeDbAsyncEnumerable(System.Collections.Generic.IEnumerable<T> enumerable) 
             : base(enumerable) 
@@ -706,14 +759,9 @@ if (IncludeTableValuedFunctions)
             : base(expression) 
         { } 
  
-        public System.Data.Entity.Infrastructure.IDbAsyncEnumerator<T> GetAsyncEnumerator() 
+        public System.Collections.Generic.IAsyncEnumerator<T> GetEnumerator() 
         { 
             return new FakeDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator()); 
-        } 
- 
-        System.Data.Entity.Infrastructure.IDbAsyncEnumerator System.Data.Entity.Infrastructure.IDbAsyncEnumerable.GetAsyncEnumerator() 
-        { 
-            return GetAsyncEnumerator(); 
         } 
  
         IQueryProvider IQueryable.Provider 
@@ -722,7 +770,7 @@ if (IncludeTableValuedFunctions)
         } 
     } 
  
-    public class FakeDbAsyncEnumerator<T> : System.Data.Entity.Infrastructure.IDbAsyncEnumerator<T> 
+    public class FakeDbAsyncEnumerator<T> : System.Collections.Generic.IAsyncEnumerator<T> 
     { 
         private readonly System.Collections.Generic.IEnumerator<T> _inner; 
  
@@ -736,7 +784,7 @@ if (IncludeTableValuedFunctions)
             _inner.Dispose(); 
         } 
  
-        public System.Threading.Tasks.Task<bool> MoveNextAsync(System.Threading.CancellationToken cancellationToken) 
+        public System.Threading.Tasks.Task<bool> MoveNext(System.Threading.CancellationToken cancellationToken) 
         { 
             return System.Threading.Tasks.Task.FromResult(_inner.MoveNext()); 
         } 
@@ -744,11 +792,6 @@ if (IncludeTableValuedFunctions)
         public T Current 
         { 
             get { return _inner.Current; } 
-        } 
- 
-        object System.Data.Entity.Infrastructure.IDbAsyncEnumerator.Current 
-        { 
-            get { return Current; } 
         } 
     }
 <# } #>
@@ -866,27 +909,19 @@ foreach(Table tbl in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(
 <# fileManager.StartNewFile(tbl.NameHumanCase + ConfigurationClassName + FileExtension);
 if(IncludeComments){#>    // <#=tbl.Name#>
 <# } #>
-    public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase + ConfigurationClassName#> : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<<#=tbl.NameHumanCase#>>
+    public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase + ConfigurationClassName#> : EntityTypeConfiguration<<#=tbl.NameHumanCase#>>
     {
-        public <#=tbl.NameHumanCase + ConfigurationClassName#>()
-            : this(<# if (string.IsNullOrEmpty(tbl.Schema)) { #>""<# } else { #>"<#=tbl.Schema#>"<# } #>)
-        {
-        }
  
-        public <#=tbl.NameHumanCase + ConfigurationClassName#>(string schema)
+        public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<<#=tbl.NameHumanCase#>> builder, string schema)
         {
- <# if (!string.IsNullOrEmpty(tbl.Schema)) { #>
-           ToTable(schema + ".<#=tbl.Name#>");
- <# } else { #>
-           ToTable("<#=tbl.Name#>");
- <# } #>
-           HasKey(<#=tbl.PrimaryKeyNameHumanCase()#>);
+            builder.ToTable("<#=tbl.Name#>", schema);
+            builder.HasKey(<#=tbl.PrimaryKeyNameHumanCase()#>);
 
 <#
 foreach(Column col in tbl.Columns.Where(x => !x.Hidden).OrderBy(x => x.Ordinal))
 {
 #>
-            <#=col.Config #>
+            builder.<#=col.Config #>
 <# } #>
 <# if(tbl.HasForeignKey) { #>
 
@@ -896,19 +931,19 @@ foreach(Column col in tbl.Columns.Where(x => !x.Hidden).OrderBy(x => x.Ordinal))
 foreach(var configFk in tbl.Columns.SelectMany(x => x.ConfigFk).OrderBy(o => o))
 {
 #>
-            <#=configFk #>
+            builder.<#=configFk #>
 <# } } #>
 <#
 foreach (string s in tbl.MappingConfiguration)
 {
 #>
-            <#=s#>
+            builder.<#=s#>
 <# } #>
 <#if(MakeClassesPartial) {#>
-            InitializePartial();
+            InitializePartial(builder, schema);
 <#}#>        }
 <#if(MakeClassesPartial) {#>
-        partial void InitializePartial();
+        partial void InitializePartial(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<<#=tbl.NameHumanCase#>> builder, string schema);
 <#}#>    }
 
 <# } }
@@ -964,6 +999,109 @@ if(returnModelCount < 2)
     }
 
 <# } } #>
+<# if(!GenerateSeparateFiles) { #>
+
+    // ************************************************************************
+    // Helper Classes
+
+<# } #>
+<# fileManager.StartNewFile("EF7Helper" + FileExtension);#>
+    internal interface EntityTypeConfiguration<TEntity> where TEntity : class
+    {
+        void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<TEntity> typeBuilder, string schema);
+    }
+
+    internal static class EF7Helper
+    {//see https://github.com/aspnet/EntityFramework/wiki/Entity-Framework-Design-Meeting-Notes-June-5,-2014#decision-property-facet-apis
+        public static void Add<TEntity>(this ModelBuilder builder, EntityTypeConfiguration<TEntity> cfg, string schema = "dbo")
+            where TEntity : class
+        {
+            builder.Entity<TEntity>(etb => cfg.Config(etb, schema));
+        }
+
+        public static PropertyBuilder<TProperty> IsOptional<TProperty>(this PropertyBuilder<TProperty> builder)
+        {
+            return builder.IsRequired(false);
+        }
+
+        public static PropertyBuilder<TProperty> IsUnicode<TProperty>(this PropertyBuilder<TProperty> builder, bool unicode)
+        {
+            return builder;
+        }
+
+        public static PropertyBuilder<TProperty> IsFixedLength<TProperty>(this PropertyBuilder<TProperty> builder)
+        {
+            return builder;
+        }
+
+        public static PropertyBuilder<TProperty> IsMaxLength<TProperty>(this PropertyBuilder<TProperty> builder)
+        {
+            return builder;
+        }
+
+        public static ReferenceNavigationBuilder<TEntity, TRelatedEntity> HasRequired<TEntity, TRelatedEntity>(
+            this EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, TRelatedEntity>> reference = null)
+            where TEntity : class
+            where TRelatedEntity : class
+        {
+            return builder.HasOne(reference);
+        }
+
+        public static ReferenceNavigationBuilder<TEntity, TRelatedEntity> HasOptional<TEntity, TRelatedEntity>(
+            this EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, TRelatedEntity>> reference = null)
+            where TEntity : class
+            where TRelatedEntity : class
+        {
+            return builder.HasOne(reference);
+        }
+
+        public static ReferenceReferenceBuilder<TEntity, TRelatedEntity> WithOptional<TEntity, TRelatedEntity>(
+            this ReferenceNavigationBuilder<TEntity, TRelatedEntity> builder, Expression<Func<TRelatedEntity, TEntity>> reference = null)
+            where TEntity : class
+            where TRelatedEntity : class
+        {
+            return builder.WithOne(reference);
+        }
+
+#if false
+        public static CollectionNavigationBuilder<TEntity, TRelatedEntity> WithMany<TEntity, TRelatedEntity>(
+            this CollectionNavigationBuilder<TEntity, TRelatedEntity> builder, Expression<Func<TRelatedEntity, System.Collections.Generic.IEnumerable<TEntity>>> reference = null)
+            where TEntity : class
+            where TRelatedEntity : class
+        {
+            //var innerBuilder = ((Microsoft.Data.Entity.Infrastructure.IInfrastructure<Microsoft.Data.Entity.Metadata.Internal.InternalRelationshipBuilder>)builder).Instance;
+
+            //return innerBuilder.PrincipalEntityType(builder.RelatedEntityType, Microsoft.Data.Entity.Metadata.Internal.ConfigurationSource.Explicit)
+            //    .IsUnique(false, Microsoft.Data.Entity.Metadata.Internal.ConfigurationSource.Explicit)
+            //    .PrincipalToDependent(collection, Microsoft.Data.Entity.Metadata.Internal.ConfigurationSource.Explicit);
+            //TODO: link to another table
+            return builder;
+        }
+#endif
+
+        public static PropertyBuilder<TProperty> HasPrecision<TProperty>(this PropertyBuilder<TProperty> builder, byte precision, byte scale)
+        {
+            //for decimal/Nullable<decimal>
+            //TODO: (precision, scale)
+            return builder;
+        }
+
+        public static PropertyBuilder<TProperty> HasDatabaseGeneratedOption<TProperty>(
+            this PropertyBuilder<TProperty> builder, DatabaseGeneratedOption option)
+        {
+            switch (option)
+            {
+                case DatabaseGeneratedOption.None:
+                    return builder.ValueGeneratedNever();
+                case DatabaseGeneratedOption.Computed:
+                    return builder.ValueGeneratedOnAddOrUpdate();
+                case DatabaseGeneratedOption.Identity:
+                    return builder.ValueGeneratedOnAdd();
+                default:
+                    throw new ArgumentException("option");
+            }
+        }
+    }
 <# fileManager.StartFooter(); #>
 }
 // </auto-generated>

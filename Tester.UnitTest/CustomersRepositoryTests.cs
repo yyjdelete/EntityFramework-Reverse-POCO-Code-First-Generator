@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EntityFramework_Reverse_POCO_Generator;
+﻿using EntityFramework_Reverse_POCO_Generator;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Tester.BusinessLogic;
 
 namespace Tester.UnitTest
@@ -41,7 +41,7 @@ namespace Tester.UnitTest
         {
             // Act
             int count = _customersRepository.Count();
-            
+
             // Assert
             Assert.AreEqual(2, count);
         }
@@ -63,6 +63,7 @@ namespace Tester.UnitTest
             Assert.AreEqual("def", def.CompanyName);
         }
 
+#if false
         [Test]
         public void Find()
         {
@@ -79,7 +80,8 @@ namespace Tester.UnitTest
             Assert.AreEqual("abc", abc.CompanyName);
             Assert.AreEqual("def", def.CompanyName);
         }
-        
+#endif
+
         [Test]
         public void FindById_ShouldFail()
         {
@@ -90,6 +92,7 @@ namespace Tester.UnitTest
             Assert.IsNull(result);
         }
 
+#if false
         [Test]
         public void Find_ShouldFail()
         {
@@ -99,6 +102,7 @@ namespace Tester.UnitTest
             // Assert
             Assert.IsNull(result);
         }
+#endif
 
         [Test]
         public async Task GetTop10Async()
@@ -109,6 +113,6 @@ namespace Tester.UnitTest
             Assert.AreEqual(2, customers.Count);
             Assert.AreEqual("abc", customers[0].CompanyName);
             Assert.AreEqual("def", customers[1].CompanyName);
-        } 
+        }
     }
 }

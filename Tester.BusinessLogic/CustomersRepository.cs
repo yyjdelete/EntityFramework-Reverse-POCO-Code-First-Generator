@@ -1,9 +1,9 @@
-﻿using System;
+﻿using EntityFramework_Reverse_POCO_Generator;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using EntityFramework_Reverse_POCO_Generator;
 
 namespace Tester.BusinessLogic
 {
@@ -13,7 +13,7 @@ namespace Tester.BusinessLogic
 
         public CustomersRepository(IMyDbContext context)
         {
-            if(context == null)
+            if (context == null)
                 throw new ArgumentNullException("context");
 
             _context = context;
@@ -27,7 +27,7 @@ namespace Tester.BusinessLogic
         public async Task<List<Customer>> GetTop10Async()
         {
             return await GetTop10().ToListAsync();
-        } 
+        }
 
         public int Count()
         {
@@ -39,10 +39,12 @@ namespace Tester.BusinessLogic
             return _context.Customers.FirstOrDefault(x => x.CustomerId == id);
         }
 
+#if false
         public Customer Find(string id)
         {
             return _context.Customers.Find(id);
         }
+#endif
 
         public void AddCustomer(Customer customer)
         {

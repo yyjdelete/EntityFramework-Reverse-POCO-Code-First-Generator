@@ -1,3 +1,17 @@
+***Not official. Just an test for me to learn EF7. Do not use in the production environment!***  
+Tested with EntityFramework.Core 7.0.0-rc1-final
+
+## Limited
+1. `System.Data.Entity.Spatial.DbGeography`,`System.Data.Entity.Spatial.DbGeometry` and `System.Data.Entity.Hierarchy.HierarchyId` is not supported by EF7.  
+2. `CodeFirstStoreFunctions` is not supported in EF7.  
+3. Stored Procedures for query is not supported by EF7(Only raw query for mapped table is supported now).  
+4. My code is too ugly.  
+5. Use some helper classes, so support more than one Context in an project is not supported.  
+6. FakeDbContext may not works(Not tested).  
+7. Not work with many2many map.  
+
+---
+
 ## EntityFramework Reverse POCO Code First Generator
 
 **Beautifully generated code first code that is fully customisable**

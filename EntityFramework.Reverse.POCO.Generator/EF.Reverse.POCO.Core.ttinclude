@@ -868,8 +868,8 @@
                         break;
 
                     case "byte[]":
-                    case "System.Data.Entity.Spatial.DbGeography":
-                    case "System.Data.Entity.Spatial.DbGeometry":
+                    case "System.Data.Entity.Spatial.DbGeography"://NOT SUPPORTED for ef7
+                    case "System.Data.Entity.Spatial.DbGeometry"://NOT SUPPORTED for ef7
                         Default = string.Empty;
                         break;
                 }
@@ -2144,7 +2144,8 @@ SELECT  SERVERPROPERTY('Edition') AS Edition,
                     case Relationship.ManyToOne:
                         if (!fkCol.Hidden)
                             return string.Format(".WithMany(b => b.{0}).HasForeignKey({1})", fkPropName, manyToManyMapping);   // Foreign Key Association
-                        return string.Format(".WithMany(b => b.{0}).Map(c => c.MapKey({1}))", fkPropName, mapKey);  // Independent Association
+                        //FIXME: What's this in EF7?
+                        return string.Format(".WithMany(b => b.{0}).HasForeignKey({1})", fkPropName, mapKey);  // Independent Association
 
                     case Relationship.ManyToMany:
                         return string.Format(".WithMany(b => b.{0}).HasForeignKey({1})", fkPropName, manyToManyMapping);
@@ -2377,7 +2378,7 @@ SELECT  SERVERPROPERTY('Edition') AS Edition,
                 switch(sqlType)
                 {
                     case "hierarchyid":
-                        sysType = "System.Data.Entity.Hierarchy.HierarchyId";
+                        sysType = "";//System.Data.Entity.Hierarchy.HierarchyId NOT SUPPORTED by EF7
                         break;
                     case "bigint":
                         sysType = "long";
@@ -2435,13 +2436,13 @@ SELECT  SERVERPROPERTY('Edition') AS Edition,
                         if (DisableGeographyTypes)
                             sysType = "";
                         else
-                            sysType = "System.Data.Entity.Spatial.DbGeography";
+                            sysType = "";//System.Data.Entity.Spatial.DbGeographyis NOT SUPPORTED by EF7
                         break;
                     case "geometry":
                         if (DisableGeographyTypes)
                             sysType = "";
                         else
-                            sysType = "System.Data.Entity.Spatial.DbGeometry";
+                            sysType = "";//System.Data.Entity.Spatial.DbGeometry is NOT SUPPORTED by EF7
                         break;
                 }
                 return sysType;
@@ -2672,6 +2673,7 @@ SELECT  SERVERPROPERTY('Edition') AS Edition,
             public void IdentifyMappingTable(List<ForeignKey> fkList, Tables tables, bool useCamelCase, string collectionType, bool checkForFkNameClashes, bool includeComments, bool isSqlCE)
             {
                 IsMapping = false;
+                return;//Not supported in EF7
 
                 var nonReadOnlyColumns = Columns.Where(c => !c.IsIdentity && !c.IsRowVersion && !c.IsStoreGenerated).ToList();
                 
