@@ -790,20 +790,16 @@
             {
                 string databaseGeneratedOption = string.Empty;
                 if(IsIdentity)
-                    databaseGeneratedOption = ".HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)";
+                    databaseGeneratedOption = ".ValueGeneratedOnAdd()";
                 if(IsStoreGenerated && !IsIdentity)
-                    databaseGeneratedOption = ".HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Computed)";
+                    databaseGeneratedOption = ".ValueGeneratedOnAddOrUpdate()";
                 if(IsPrimaryKey && !IsIdentity && !IsStoreGenerated)
-                    databaseGeneratedOption = ".HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)";
+                    databaseGeneratedOption = ".ValueGeneratedNever()";
 
-                Config = string.Format("Property(x => x.{0}).HasColumnName(\"{1}\"){2}{3}{4}{5}{6}{7}{8}{9}{10};", NameHumanCase, Name,
-                                            (IsNullable) ? ".IsOptional()" : ".IsRequired()",
-                                            (IsFixedLength || IsRowVersion) ? ".IsFixedLength()" : "",
-                                            (IsUnicode) ? string.Empty : ".IsUnicode(false)",
-                                            ".HasColumnType(\"" + SqlPropertyType + "\")",
-                                            (!IsMaxLength && MaxLength > 0) ? ".HasMaxLength(" + MaxLength + ")" : string.Empty,
-                                            (IsMaxLength) ? ".IsMaxLength()" : string.Empty,
-                                            (Scale > 0) ? ".HasPrecision(" + Precision + "," + Scale + ")" : string.Empty,
+                Config = string.Format("Property(x => x.{0}).HasColumnName(\"{1}\"){2}{3}{4}{5}{6};", NameHumanCase, Name,
+                                            IsNullable ? ".IsRequired(false)" : ".IsRequired(true)",
+                                            ".HasColumnType(\"" + SqlPropertyType + ((Scale > 0) ? "(" + Precision + "," + Scale + ")" : string.Empty) + "\")",
+                                            (!IsMaxLength && MaxLength > 0) ? ".HasMaxLength(" + MaxLength + ")" : string.Empty,//TODO: what about ntext??
                                             (IsRowVersion) ? ".IsRowVersion()" : string.Empty,
                                             databaseGeneratedOption);
             }
@@ -2121,7 +2117,7 @@ SELECT  SERVERPROPERTY('Edition') AS Edition,
                 }
 
                 if (withMany || pkCol.IsPrimaryKey)
-                    return fkCol.IsNullable ? "Optional" : "Required";
+                    return fkCol.IsNullable ? "One" : "One";
 
                 return "Many";
             }
@@ -2136,7 +2132,7 @@ SELECT  SERVERPROPERTY('Edition') AS Edition,
                 switch (relationship)
                 {
                     case Relationship.OneToOne:
-                        return string.Format(".WithOptional(b => b.{0})", fkPropName);
+                        return string.Format(".WithOne(b => b.{0})", fkPropName);
 
                     case Relationship.OneToMany:
                         return string.Format(".WithRequiredDependent(b => b.{0})", fkPropName);

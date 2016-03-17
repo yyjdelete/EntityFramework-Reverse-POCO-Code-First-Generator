@@ -266,16 +266,16 @@ case "DropCreateDatabaseIfModelChanges":
 #warning CodeFirstStoreFunctions is not support in EF7 at the time
 #if false
             modelBuilder.Conventions.Add(new CodeFirstStoreFunctions.FunctionsConvention<<#=DbContextName#>>("dbo"));
+#endif
 <#      foreach (StoredProcedure sp in storedProcs.Where(s => s.IsTVF)){#>
             modelBuilder.ComplexType<<#=WriteStoredProcReturnModelName(sp)#>>();
 <# } #>
-#endif
 <# } #>
 <#
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-            modelBuilder.Add(new <#=tbl.NameHumanCase + ConfigurationClassName#>());
+            EF7Helper.Config(modelBuilder, new <#=tbl.NameHumanCase + ConfigurationClassName#>());
 <# } #>
 <#if(MakeClassesPartial) {#>
 
@@ -289,7 +289,7 @@ foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-            modelBuilder.Add(new <#=tbl.NameHumanCase + ConfigurationClassName#>(), schema);
+            EF7Helper.Config(modelBuilder, new <#=tbl.NameHumanCase + ConfigurationClassName#>(), schema);
 <# } #>
             return modelBuilder;
         }
@@ -403,8 +403,24 @@ if (IncludeTableValuedFunctions)
 <#= WriteTableValuedFunctionDeclareSqlParameter(sp) #> 
             return ((Microsoft.Data.Entity.Infrastructure.IObjectContextAdapter)this).ObjectContext.CreateQuery<<#=spReturnClassName#>>("[<#=DbContextName#>].[<#=sp.Name#>](<#= WriteStoredProcFunctionSqlAtParams(sp) #>)", <#= WriteTableValuedFunctionSqlParameterAnonymousArray(sp) #>);
         }
+<# } } } #>
 
-<# } } }
+        // ************************************************************************
+        // Helper Classes
+        internal interface EntityTypeConfiguration<TEntity> where TEntity : class
+        {
+            void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<TEntity> typeBuilder, string schema);
+        }
+
+        private static class EF7Helper
+        {//see https://github.com/aspnet/EntityFramework/wiki/Entity-Framework-Design-Meeting-Notes-June-5,-2014#decision-property-facet-apis
+            public static void Config<TEntity>(ModelBuilder builder, EntityTypeConfiguration<TEntity> cfg, string schema = "dbo")
+                where TEntity : class
+            {
+                builder.Entity<TEntity>(etb => cfg.Config(etb, schema));
+            }
+        }
+<#
 /**/#>    }
 <# }
     if (ElementsToGenerate.HasFlag(Elements.Context) && AddUnitTestingDbContext)
@@ -911,7 +927,7 @@ foreach(Table tbl in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(
 <# fileManager.StartNewFile(tbl.NameHumanCase + ConfigurationClassName + FileExtension);
 if(IncludeComments){#>    // <#=tbl.Name#>
 <# } #>
-    public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase + ConfigurationClassName#> : EntityTypeConfiguration<<#=tbl.NameHumanCase#>>
+    public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase + ConfigurationClassName#> : <#=DbContextName#>.EntityTypeConfiguration<<#=tbl.NameHumanCase#>>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<<#=tbl.NameHumanCase#>> builder, string schema)
@@ -1001,109 +1017,6 @@ if(returnModelCount < 2)
     }
 
 <# } } #>
-<# if(!GenerateSeparateFiles) { #>
-
-    // ************************************************************************
-    // Helper Classes
-
-<# } #>
-<# fileManager.StartNewFile("EF7Helper" + FileExtension);#>
-    internal interface EntityTypeConfiguration<TEntity> where TEntity : class
-    {
-        void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<TEntity> typeBuilder, string schema);
-    }
-
-    internal static class EF7Helper
-    {//see https://github.com/aspnet/EntityFramework/wiki/Entity-Framework-Design-Meeting-Notes-June-5,-2014#decision-property-facet-apis
-        public static void Add<TEntity>(this ModelBuilder builder, EntityTypeConfiguration<TEntity> cfg, string schema = "dbo")
-            where TEntity : class
-        {
-            builder.Entity<TEntity>(etb => cfg.Config(etb, schema));
-        }
-
-        public static PropertyBuilder<TProperty> IsOptional<TProperty>(this PropertyBuilder<TProperty> builder)
-        {
-            return builder.IsRequired(false);
-        }
-
-        public static PropertyBuilder<TProperty> IsUnicode<TProperty>(this PropertyBuilder<TProperty> builder, bool unicode)
-        {
-            return builder;
-        }
-
-        public static PropertyBuilder<TProperty> IsFixedLength<TProperty>(this PropertyBuilder<TProperty> builder)
-        {
-            return builder;
-        }
-
-        public static PropertyBuilder<TProperty> IsMaxLength<TProperty>(this PropertyBuilder<TProperty> builder)
-        {
-            return builder;
-        }
-
-        public static ReferenceNavigationBuilder<TEntity, TRelatedEntity> HasRequired<TEntity, TRelatedEntity>(
-            this EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, TRelatedEntity>> reference = null)
-            where TEntity : class
-            where TRelatedEntity : class
-        {
-            return builder.HasOne(reference);
-        }
-
-        public static ReferenceNavigationBuilder<TEntity, TRelatedEntity> HasOptional<TEntity, TRelatedEntity>(
-            this EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, TRelatedEntity>> reference = null)
-            where TEntity : class
-            where TRelatedEntity : class
-        {
-            return builder.HasOne(reference);
-        }
-
-        public static ReferenceReferenceBuilder<TEntity, TRelatedEntity> WithOptional<TEntity, TRelatedEntity>(
-            this ReferenceNavigationBuilder<TEntity, TRelatedEntity> builder, Expression<Func<TRelatedEntity, TEntity>> reference = null)
-            where TEntity : class
-            where TRelatedEntity : class
-        {
-            return builder.WithOne(reference);
-        }
-
-#if false
-        public static CollectionNavigationBuilder<TEntity, TRelatedEntity> WithMany<TEntity, TRelatedEntity>(
-            this CollectionNavigationBuilder<TEntity, TRelatedEntity> builder, Expression<Func<TRelatedEntity, System.Collections.Generic.IEnumerable<TEntity>>> reference = null)
-            where TEntity : class
-            where TRelatedEntity : class
-        {
-            //var innerBuilder = ((Microsoft.Data.Entity.Infrastructure.IInfrastructure<Microsoft.Data.Entity.Metadata.Internal.InternalRelationshipBuilder>)builder).Instance;
-
-            //return innerBuilder.PrincipalEntityType(builder.RelatedEntityType, Microsoft.Data.Entity.Metadata.Internal.ConfigurationSource.Explicit)
-            //    .IsUnique(false, Microsoft.Data.Entity.Metadata.Internal.ConfigurationSource.Explicit)
-            //    .PrincipalToDependent(collection, Microsoft.Data.Entity.Metadata.Internal.ConfigurationSource.Explicit);
-            //TODO: link to another table
-            return builder;
-        }
-#endif
-
-        public static PropertyBuilder<TProperty> HasPrecision<TProperty>(this PropertyBuilder<TProperty> builder, byte precision, byte scale)
-        {
-            //for decimal/Nullable<decimal>
-            //TODO: (precision, scale)
-            return builder;
-        }
-
-        public static PropertyBuilder<TProperty> HasDatabaseGeneratedOption<TProperty>(
-            this PropertyBuilder<TProperty> builder, DatabaseGeneratedOption option)
-        {
-            switch (option)
-            {
-                case DatabaseGeneratedOption.None:
-                    return builder.ValueGeneratedNever();
-                case DatabaseGeneratedOption.Computed:
-                    return builder.ValueGeneratedOnAddOrUpdate();
-                case DatabaseGeneratedOption.Identity:
-                    return builder.ValueGeneratedOnAdd();
-                default:
-                    throw new ArgumentException("option");
-            }
-        }
-    }
 <# fileManager.StartFooter(); #>
 }
 // </auto-generated>

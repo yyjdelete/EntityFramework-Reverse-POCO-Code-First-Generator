@@ -6,7 +6,7 @@ Tested with EntityFramework.Core 7.0.0-rc1-final
 2. `CodeFirstStoreFunctions` is not supported in EF7.  
 3. Stored Procedures for query is not supported by EF7(Only raw query for mapped table is supported now).  
 4. My code is too ugly.  
-5. Use some helper classes, so support more than one Context in an project is not supported.  
+5. __Use some helper classes, so support more than one Context in an project is not supported.__  
 6. FakeDbContext may not works(Not tested).  
 7. Not work with many2many map.  
 

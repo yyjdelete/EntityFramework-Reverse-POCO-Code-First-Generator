@@ -168,66 +168,66 @@ namespace EntityFramework_Reverse_POCO_Generator
 #if false
             modelBuilder.Conventions.Add(new CodeFirstStoreFunctions.FunctionsConvention<MyDbContext>("dbo"));
 #endif
-            modelBuilder.Add(new AlphabeticalListOfProductConfiguration());
-            modelBuilder.Add(new CategoryConfiguration());
-            modelBuilder.Add(new CategorySalesFor1997Configuration());
-            modelBuilder.Add(new CurrentProductListConfiguration());
-            modelBuilder.Add(new CustomerConfiguration());
-            modelBuilder.Add(new CustomerAndSuppliersByCityConfiguration());
-            modelBuilder.Add(new CustomerCustomerDemoConfiguration());
-            modelBuilder.Add(new CustomerDemographicConfiguration());
-            modelBuilder.Add(new EmployeeConfiguration());
-            modelBuilder.Add(new EmployeeTerritoryConfiguration());
-            modelBuilder.Add(new InvoiceConfiguration());
-            modelBuilder.Add(new OrderConfiguration());
-            modelBuilder.Add(new OrderDetailConfiguration());
-            modelBuilder.Add(new OrderDetailsExtendedConfiguration());
-            modelBuilder.Add(new OrdersQryConfiguration());
-            modelBuilder.Add(new OrderSubtotalConfiguration());
-            modelBuilder.Add(new ProductConfiguration());
-            modelBuilder.Add(new ProductsAboveAveragePriceConfiguration());
-            modelBuilder.Add(new ProductSalesFor1997Configuration());
-            modelBuilder.Add(new ProductsByCategoryConfiguration());
-            modelBuilder.Add(new RegionConfiguration());
-            modelBuilder.Add(new SalesByCategoryConfiguration());
-            modelBuilder.Add(new SalesTotalsByAmountConfiguration());
-            modelBuilder.Add(new ShipperConfiguration());
-            modelBuilder.Add(new SummaryOfSalesByQuarterConfiguration());
-            modelBuilder.Add(new SummaryOfSalesByYearConfiguration());
-            modelBuilder.Add(new SupplierConfiguration());
-            modelBuilder.Add(new TerritoryConfiguration());
+            EF7Helper.Config(modelBuilder, new AlphabeticalListOfProductConfiguration());
+            EF7Helper.Config(modelBuilder, new CategoryConfiguration());
+            EF7Helper.Config(modelBuilder, new CategorySalesFor1997Configuration());
+            EF7Helper.Config(modelBuilder, new CurrentProductListConfiguration());
+            EF7Helper.Config(modelBuilder, new CustomerConfiguration());
+            EF7Helper.Config(modelBuilder, new CustomerAndSuppliersByCityConfiguration());
+            EF7Helper.Config(modelBuilder, new CustomerCustomerDemoConfiguration());
+            EF7Helper.Config(modelBuilder, new CustomerDemographicConfiguration());
+            EF7Helper.Config(modelBuilder, new EmployeeConfiguration());
+            EF7Helper.Config(modelBuilder, new EmployeeTerritoryConfiguration());
+            EF7Helper.Config(modelBuilder, new InvoiceConfiguration());
+            EF7Helper.Config(modelBuilder, new OrderConfiguration());
+            EF7Helper.Config(modelBuilder, new OrderDetailConfiguration());
+            EF7Helper.Config(modelBuilder, new OrderDetailsExtendedConfiguration());
+            EF7Helper.Config(modelBuilder, new OrdersQryConfiguration());
+            EF7Helper.Config(modelBuilder, new OrderSubtotalConfiguration());
+            EF7Helper.Config(modelBuilder, new ProductConfiguration());
+            EF7Helper.Config(modelBuilder, new ProductsAboveAveragePriceConfiguration());
+            EF7Helper.Config(modelBuilder, new ProductSalesFor1997Configuration());
+            EF7Helper.Config(modelBuilder, new ProductsByCategoryConfiguration());
+            EF7Helper.Config(modelBuilder, new RegionConfiguration());
+            EF7Helper.Config(modelBuilder, new SalesByCategoryConfiguration());
+            EF7Helper.Config(modelBuilder, new SalesTotalsByAmountConfiguration());
+            EF7Helper.Config(modelBuilder, new ShipperConfiguration());
+            EF7Helper.Config(modelBuilder, new SummaryOfSalesByQuarterConfiguration());
+            EF7Helper.Config(modelBuilder, new SummaryOfSalesByYearConfiguration());
+            EF7Helper.Config(modelBuilder, new SupplierConfiguration());
+            EF7Helper.Config(modelBuilder, new TerritoryConfiguration());
         }
 
         public static Microsoft.Data.Entity.ModelBuilder CreateModel(Microsoft.Data.Entity.ModelBuilder modelBuilder, string schema)
         {
-            modelBuilder.Add(new AlphabeticalListOfProductConfiguration(), schema);
-            modelBuilder.Add(new CategoryConfiguration(), schema);
-            modelBuilder.Add(new CategorySalesFor1997Configuration(), schema);
-            modelBuilder.Add(new CurrentProductListConfiguration(), schema);
-            modelBuilder.Add(new CustomerConfiguration(), schema);
-            modelBuilder.Add(new CustomerAndSuppliersByCityConfiguration(), schema);
-            modelBuilder.Add(new CustomerCustomerDemoConfiguration(), schema);
-            modelBuilder.Add(new CustomerDemographicConfiguration(), schema);
-            modelBuilder.Add(new EmployeeConfiguration(), schema);
-            modelBuilder.Add(new EmployeeTerritoryConfiguration(), schema);
-            modelBuilder.Add(new InvoiceConfiguration(), schema);
-            modelBuilder.Add(new OrderConfiguration(), schema);
-            modelBuilder.Add(new OrderDetailConfiguration(), schema);
-            modelBuilder.Add(new OrderDetailsExtendedConfiguration(), schema);
-            modelBuilder.Add(new OrdersQryConfiguration(), schema);
-            modelBuilder.Add(new OrderSubtotalConfiguration(), schema);
-            modelBuilder.Add(new ProductConfiguration(), schema);
-            modelBuilder.Add(new ProductsAboveAveragePriceConfiguration(), schema);
-            modelBuilder.Add(new ProductSalesFor1997Configuration(), schema);
-            modelBuilder.Add(new ProductsByCategoryConfiguration(), schema);
-            modelBuilder.Add(new RegionConfiguration(), schema);
-            modelBuilder.Add(new SalesByCategoryConfiguration(), schema);
-            modelBuilder.Add(new SalesTotalsByAmountConfiguration(), schema);
-            modelBuilder.Add(new ShipperConfiguration(), schema);
-            modelBuilder.Add(new SummaryOfSalesByQuarterConfiguration(), schema);
-            modelBuilder.Add(new SummaryOfSalesByYearConfiguration(), schema);
-            modelBuilder.Add(new SupplierConfiguration(), schema);
-            modelBuilder.Add(new TerritoryConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new AlphabeticalListOfProductConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new CategoryConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new CategorySalesFor1997Configuration(), schema);
+            EF7Helper.Config(modelBuilder, new CurrentProductListConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new CustomerConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new CustomerAndSuppliersByCityConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new CustomerCustomerDemoConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new CustomerDemographicConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new EmployeeConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new EmployeeTerritoryConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new InvoiceConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new OrderConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new OrderDetailConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new OrderDetailsExtendedConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new OrdersQryConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new OrderSubtotalConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new ProductConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new ProductsAboveAveragePriceConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new ProductSalesFor1997Configuration(), schema);
+            EF7Helper.Config(modelBuilder, new ProductsByCategoryConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new RegionConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new SalesByCategoryConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new SalesTotalsByAmountConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new ShipperConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new SummaryOfSalesByQuarterConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new SummaryOfSalesByYearConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new SupplierConfiguration(), schema);
+            EF7Helper.Config(modelBuilder, new TerritoryConfiguration(), schema);
             return modelBuilder;
         }
         
@@ -388,6 +388,22 @@ namespace EntityFramework_Reverse_POCO_Generator
         }
 
         // Table Valued Functions
+
+        // ************************************************************************
+        // Helper Classes
+        internal interface EntityTypeConfiguration<TEntity> where TEntity : class
+        {
+            void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<TEntity> typeBuilder, string schema);
+        }
+
+        private static class EF7Helper
+        {//see https://github.com/aspnet/EntityFramework/wiki/Entity-Framework-Design-Meeting-Notes-June-5,-2014#decision-property-facet-apis
+            public static void Config<TEntity>(ModelBuilder builder, EntityTypeConfiguration<TEntity> cfg, string schema = "dbo")
+                where TEntity : class
+            {
+                builder.Entity<TEntity>(etb => cfg.Config(etb, schema));
+            }
+        }
     }
 #warning AddUnitTestingDbContext is not really work with EF7
 
@@ -1312,7 +1328,7 @@ namespace EntityFramework_Reverse_POCO_Generator
     // POCO Configuration
 
     // Alphabetical list of products
-    public class AlphabeticalListOfProductConfiguration : EntityTypeConfiguration<AlphabeticalListOfProduct>
+    public class AlphabeticalListOfProductConfiguration : MyDbContext.EntityTypeConfiguration<AlphabeticalListOfProduct>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<AlphabeticalListOfProduct> builder, string schema)
@@ -1320,22 +1336,22 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Alphabetical list of products", schema);
             builder.HasKey(x => new { x.ProductId, x.ProductName, x.Discontinued, x.CategoryName });
 
-            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.SupplierId).HasColumnName("SupplierID").IsOptional().HasColumnType("int");
-            builder.Property(x => x.CategoryId).HasColumnName("CategoryID").IsOptional().HasColumnType("int");
-            builder.Property(x => x.QuantityPerUnit).HasColumnName("QuantityPerUnit").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
-            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsOptional().HasColumnType("money").HasPrecision(19,4);
-            builder.Property(x => x.UnitsInStock).HasColumnName("UnitsInStock").IsOptional().HasColumnType("smallint");
-            builder.Property(x => x.UnitsOnOrder).HasColumnName("UnitsOnOrder").IsOptional().HasColumnType("smallint");
-            builder.Property(x => x.ReorderLevel).HasColumnName("ReorderLevel").IsOptional().HasColumnType("smallint");
-            builder.Property(x => x.Discontinued).HasColumnName("Discontinued").IsRequired().HasColumnType("bit");
-            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.SupplierId).HasColumnName("SupplierID").IsRequired(false).HasColumnType("int");
+            builder.Property(x => x.CategoryId).HasColumnName("CategoryID").IsRequired(false).HasColumnType("int");
+            builder.Property(x => x.QuantityPerUnit).HasColumnName("QuantityPerUnit").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(20);
+            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired(false).HasColumnType("money(19,4)");
+            builder.Property(x => x.UnitsInStock).HasColumnName("UnitsInStock").IsRequired(false).HasColumnType("smallint");
+            builder.Property(x => x.UnitsOnOrder).HasColumnName("UnitsOnOrder").IsRequired(false).HasColumnType("smallint");
+            builder.Property(x => x.ReorderLevel).HasColumnName("ReorderLevel").IsRequired(false).HasColumnType("smallint");
+            builder.Property(x => x.Discontinued).HasColumnName("Discontinued").IsRequired(true).HasColumnType("bit");
+            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(15);
         }
     }
 
     // Categories
-    public class CategoryConfiguration : EntityTypeConfiguration<Category>
+    public class CategoryConfiguration : MyDbContext.EntityTypeConfiguration<Category>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Category> builder, string schema)
@@ -1343,15 +1359,15 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Categories", schema);
             builder.HasKey(x => x.CategoryId);
 
-            builder.Property(x => x.CategoryId).HasColumnName("CategoryID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.Description).HasColumnName("Description").IsOptional().HasColumnType("ntext").IsMaxLength();
-            builder.Property(x => x.Picture).HasColumnName("Picture").IsOptional().HasColumnType("image").HasMaxLength(2147483647);
+            builder.Property(x => x.CategoryId).HasColumnName("CategoryID").IsRequired(true).HasColumnType("int").ValueGeneratedOnAdd();
+            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.Description).HasColumnName("Description").IsRequired(false).HasColumnType("ntext");
+            builder.Property(x => x.Picture).HasColumnName("Picture").IsRequired(false).HasColumnType("image").HasMaxLength(2147483647);
         }
     }
 
     // Category Sales for 1997
-    public class CategorySalesFor1997Configuration : EntityTypeConfiguration<CategorySalesFor1997>
+    public class CategorySalesFor1997Configuration : MyDbContext.EntityTypeConfiguration<CategorySalesFor1997>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<CategorySalesFor1997> builder, string schema)
@@ -1359,13 +1375,13 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Category Sales for 1997", schema);
             builder.HasKey(x => x.CategoryName);
 
-            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.CategorySales).HasColumnName("CategorySales").IsOptional().HasColumnType("money").HasPrecision(19,4);
+            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.CategorySales).HasColumnName("CategorySales").IsRequired(false).HasColumnType("money(19,4)");
         }
     }
 
     // Current Product List
-    public class CurrentProductListConfiguration : EntityTypeConfiguration<CurrentProductList>
+    public class CurrentProductListConfiguration : MyDbContext.EntityTypeConfiguration<CurrentProductList>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<CurrentProductList> builder, string schema)
@@ -1373,13 +1389,13 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Current Product List", schema);
             builder.HasKey(x => new { x.ProductId, x.ProductName });
 
-            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired(true).HasColumnType("int").ValueGeneratedOnAdd();
+            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
         }
     }
 
     // Customers
-    public class CustomerConfiguration : EntityTypeConfiguration<Customer>
+    public class CustomerConfiguration : MyDbContext.EntityTypeConfiguration<Customer>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Customer> builder, string schema)
@@ -1387,22 +1403,22 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Customers", schema);
             builder.HasKey(x => x.CustomerId);
 
-            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsRequired().IsFixedLength().HasColumnType("nchar").HasMaxLength(5).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ContactName).HasColumnName("ContactName").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
-            builder.Property(x => x.ContactTitle).HasColumnName("ContactTitle").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
-            builder.Property(x => x.Address).HasColumnName("Address").IsOptional().HasColumnType("nvarchar").HasMaxLength(60);
-            builder.Property(x => x.City).HasColumnName("City").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.Region).HasColumnName("Region").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
-            builder.Property(x => x.Country).HasColumnName("Country").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.Phone).HasColumnName("Phone").IsOptional().HasColumnType("nvarchar").HasMaxLength(24);
-            builder.Property(x => x.Fax).HasColumnName("Fax").IsOptional().HasColumnType("nvarchar").HasMaxLength(24);
+            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsRequired(true).HasColumnType("nchar").HasMaxLength(5).ValueGeneratedNever();
+            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ContactName).HasColumnName("ContactName").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(30);
+            builder.Property(x => x.ContactTitle).HasColumnName("ContactTitle").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(30);
+            builder.Property(x => x.Address).HasColumnName("Address").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(60);
+            builder.Property(x => x.City).HasColumnName("City").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.Region).HasColumnName("Region").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(10);
+            builder.Property(x => x.Country).HasColumnName("Country").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.Phone).HasColumnName("Phone").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(24);
+            builder.Property(x => x.Fax).HasColumnName("Fax").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(24);
         }
     }
 
     // Customer and Suppliers by City
-    public class CustomerAndSuppliersByCityConfiguration : EntityTypeConfiguration<CustomerAndSuppliersByCity>
+    public class CustomerAndSuppliersByCityConfiguration : MyDbContext.EntityTypeConfiguration<CustomerAndSuppliersByCity>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<CustomerAndSuppliersByCity> builder, string schema)
@@ -1410,15 +1426,15 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Customer and Suppliers by City", schema);
             builder.HasKey(x => new { x.CompanyName, x.Relationship });
 
-            builder.Property(x => x.City).HasColumnName("City").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ContactName).HasColumnName("ContactName").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
-            builder.Property(x => x.Relationship).HasColumnName("Relationship").IsRequired().IsUnicode(false).HasColumnType("varchar").HasMaxLength(9);
+            builder.Property(x => x.City).HasColumnName("City").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ContactName).HasColumnName("ContactName").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(30);
+            builder.Property(x => x.Relationship).HasColumnName("Relationship").IsRequired(true).HasColumnType("varchar").HasMaxLength(9);
         }
     }
 
     // CustomerCustomerDemo
-    public class CustomerCustomerDemoConfiguration : EntityTypeConfiguration<CustomerCustomerDemo>
+    public class CustomerCustomerDemoConfiguration : MyDbContext.EntityTypeConfiguration<CustomerCustomerDemo>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<CustomerCustomerDemo> builder, string schema)
@@ -1426,17 +1442,17 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("CustomerCustomerDemo", schema);
             builder.HasKey(x => new { x.CustomerId, x.CustomerTypeId });
 
-            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsRequired().IsFixedLength().HasColumnType("nchar").HasMaxLength(5).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            builder.Property(x => x.CustomerTypeId).HasColumnName("CustomerTypeID").IsRequired().IsFixedLength().HasColumnType("nchar").HasMaxLength(10).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsRequired(true).HasColumnType("nchar").HasMaxLength(5).ValueGeneratedNever();
+            builder.Property(x => x.CustomerTypeId).HasColumnName("CustomerTypeID").IsRequired(true).HasColumnType("nchar").HasMaxLength(10).ValueGeneratedNever();
 
             // Foreign keys
-            builder.HasRequired(a => a.Customer).WithMany(b => b.CustomerCustomerDemoes).HasForeignKey(c => c.CustomerId); // FK_CustomerCustomerDemo_Customers
-            builder.HasRequired(a => a.CustomerDemographic).WithMany(b => b.CustomerCustomerDemoes).HasForeignKey(c => c.CustomerTypeId); // FK_CustomerCustomerDemo
+            builder.HasOne(a => a.Customer).WithMany(b => b.CustomerCustomerDemoes).HasForeignKey(c => c.CustomerId); // FK_CustomerCustomerDemo_Customers
+            builder.HasOne(a => a.CustomerDemographic).WithMany(b => b.CustomerCustomerDemoes).HasForeignKey(c => c.CustomerTypeId); // FK_CustomerCustomerDemo
         }
     }
 
     // CustomerDemographics
-    public class CustomerDemographicConfiguration : EntityTypeConfiguration<CustomerDemographic>
+    public class CustomerDemographicConfiguration : MyDbContext.EntityTypeConfiguration<CustomerDemographic>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<CustomerDemographic> builder, string schema)
@@ -1444,13 +1460,13 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("CustomerDemographics", schema);
             builder.HasKey(x => x.CustomerTypeId);
 
-            builder.Property(x => x.CustomerTypeId).HasColumnName("CustomerTypeID").IsRequired().IsFixedLength().HasColumnType("nchar").HasMaxLength(10).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            builder.Property(x => x.CustomerDesc).HasColumnName("CustomerDesc").IsOptional().HasColumnType("ntext").IsMaxLength();
+            builder.Property(x => x.CustomerTypeId).HasColumnName("CustomerTypeID").IsRequired(true).HasColumnType("nchar").HasMaxLength(10).ValueGeneratedNever();
+            builder.Property(x => x.CustomerDesc).HasColumnName("CustomerDesc").IsRequired(false).HasColumnType("ntext");
         }
     }
 
     // Employees
-    public class EmployeeConfiguration : EntityTypeConfiguration<Employee>
+    public class EmployeeConfiguration : MyDbContext.EntityTypeConfiguration<Employee>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Employee> builder, string schema)
@@ -1458,32 +1474,32 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Employees", schema);
             builder.HasKey(x => x.EmployeeId);
 
-            builder.Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            builder.Property(x => x.LastName).HasColumnName("LastName").IsRequired().HasColumnType("nvarchar").HasMaxLength(20);
-            builder.Property(x => x.FirstName).HasColumnName("FirstName").IsRequired().HasColumnType("nvarchar").HasMaxLength(10);
-            builder.Property(x => x.Title).HasColumnName("Title").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
-            builder.Property(x => x.TitleOfCourtesy).HasColumnName("TitleOfCourtesy").IsOptional().HasColumnType("nvarchar").HasMaxLength(25);
-            builder.Property(x => x.BirthDate).HasColumnName("BirthDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.HireDate).HasColumnName("HireDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.Address).HasColumnName("Address").IsOptional().HasColumnType("nvarchar").HasMaxLength(60);
-            builder.Property(x => x.City).HasColumnName("City").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.Region).HasColumnName("Region").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
-            builder.Property(x => x.Country).HasColumnName("Country").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.HomePhone).HasColumnName("HomePhone").IsOptional().HasColumnType("nvarchar").HasMaxLength(24);
-            builder.Property(x => x.Extension).HasColumnName("Extension").IsOptional().HasColumnType("nvarchar").HasMaxLength(4);
-            builder.Property(x => x.Photo).HasColumnName("Photo").IsOptional().HasColumnType("image").HasMaxLength(2147483647);
-            builder.Property(x => x.Notes).HasColumnName("Notes").IsOptional().HasColumnType("ntext").IsMaxLength();
-            builder.Property(x => x.ReportsTo).HasColumnName("ReportsTo").IsOptional().HasColumnType("int");
-            builder.Property(x => x.PhotoPath).HasColumnName("PhotoPath").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            builder.Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsRequired(true).HasColumnType("int").ValueGeneratedOnAdd();
+            builder.Property(x => x.LastName).HasColumnName("LastName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(20);
+            builder.Property(x => x.FirstName).HasColumnName("FirstName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(10);
+            builder.Property(x => x.Title).HasColumnName("Title").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(30);
+            builder.Property(x => x.TitleOfCourtesy).HasColumnName("TitleOfCourtesy").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(25);
+            builder.Property(x => x.BirthDate).HasColumnName("BirthDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.HireDate).HasColumnName("HireDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.Address).HasColumnName("Address").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(60);
+            builder.Property(x => x.City).HasColumnName("City").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.Region).HasColumnName("Region").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(10);
+            builder.Property(x => x.Country).HasColumnName("Country").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.HomePhone).HasColumnName("HomePhone").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(24);
+            builder.Property(x => x.Extension).HasColumnName("Extension").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(4);
+            builder.Property(x => x.Photo).HasColumnName("Photo").IsRequired(false).HasColumnType("image").HasMaxLength(2147483647);
+            builder.Property(x => x.Notes).HasColumnName("Notes").IsRequired(false).HasColumnType("ntext");
+            builder.Property(x => x.ReportsTo).HasColumnName("ReportsTo").IsRequired(false).HasColumnType("int");
+            builder.Property(x => x.PhotoPath).HasColumnName("PhotoPath").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(255);
 
             // Foreign keys
-            builder.HasOptional(a => a.Employee_ReportsTo).WithMany(b => b.Employees).HasForeignKey(c => c.ReportsTo); // FK_Employees_Employees
+            builder.HasOne(a => a.Employee_ReportsTo).WithMany(b => b.Employees).HasForeignKey(c => c.ReportsTo); // FK_Employees_Employees
         }
     }
 
     // EmployeeTerritories
-    public class EmployeeTerritoryConfiguration : EntityTypeConfiguration<EmployeeTerritory>
+    public class EmployeeTerritoryConfiguration : MyDbContext.EntityTypeConfiguration<EmployeeTerritory>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<EmployeeTerritory> builder, string schema)
@@ -1491,17 +1507,17 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("EmployeeTerritories", schema);
             builder.HasKey(x => new { x.EmployeeId, x.TerritoryId });
 
-            builder.Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            builder.Property(x => x.TerritoryId).HasColumnName("TerritoryID").IsRequired().HasColumnType("nvarchar").HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            builder.Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsRequired(true).HasColumnType("int").ValueGeneratedNever();
+            builder.Property(x => x.TerritoryId).HasColumnName("TerritoryID").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(20).ValueGeneratedNever();
 
             // Foreign keys
-            builder.HasRequired(a => a.Employee).WithMany(b => b.EmployeeTerritories).HasForeignKey(c => c.EmployeeId); // FK_EmployeeTerritories_Employees
-            builder.HasRequired(a => a.Territory).WithMany(b => b.EmployeeTerritories).HasForeignKey(c => c.TerritoryId); // FK_EmployeeTerritories_Territories
+            builder.HasOne(a => a.Employee).WithMany(b => b.EmployeeTerritories).HasForeignKey(c => c.EmployeeId); // FK_EmployeeTerritories_Employees
+            builder.HasOne(a => a.Territory).WithMany(b => b.EmployeeTerritories).HasForeignKey(c => c.TerritoryId); // FK_EmployeeTerritories_Territories
         }
     }
 
     // Invoices
-    public class InvoiceConfiguration : EntityTypeConfiguration<Invoice>
+    public class InvoiceConfiguration : MyDbContext.EntityTypeConfiguration<Invoice>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Invoice> builder, string schema)
@@ -1509,37 +1525,37 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Invoices", schema);
             builder.HasKey(x => new { x.CustomerName, x.Salesperson, x.OrderId, x.ShipperName, x.ProductId, x.ProductName, x.UnitPrice, x.Quantity, x.Discount });
 
-            builder.Property(x => x.ShipName).HasColumnName("ShipName").IsOptional().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ShipAddress).HasColumnName("ShipAddress").IsOptional().HasColumnType("nvarchar").HasMaxLength(60);
-            builder.Property(x => x.ShipCity).HasColumnName("ShipCity").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.ShipRegion).HasColumnName("ShipRegion").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.ShipPostalCode).HasColumnName("ShipPostalCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
-            builder.Property(x => x.ShipCountry).HasColumnName("ShipCountry").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsOptional().IsFixedLength().HasColumnType("nchar").HasMaxLength(5);
-            builder.Property(x => x.CustomerName).HasColumnName("CustomerName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.Address).HasColumnName("Address").IsOptional().HasColumnType("nvarchar").HasMaxLength(60);
-            builder.Property(x => x.City).HasColumnName("City").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.Region).HasColumnName("Region").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
-            builder.Property(x => x.Country).HasColumnName("Country").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.Salesperson).HasColumnName("Salesperson").IsRequired().HasColumnType("nvarchar").HasMaxLength(31);
-            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.OrderDate).HasColumnName("OrderDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.RequiredDate).HasColumnName("RequiredDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.ShipperName).HasColumnName("ShipperName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired().HasColumnType("money").HasPrecision(19,4);
-            builder.Property(x => x.Quantity).HasColumnName("Quantity").IsRequired().HasColumnType("smallint");
-            builder.Property(x => x.Discount).HasColumnName("Discount").IsRequired().HasColumnType("real");
-            builder.Property(x => x.ExtendedPrice).HasColumnName("ExtendedPrice").IsOptional().HasColumnType("money").HasPrecision(19,4);
-            builder.Property(x => x.Freight).HasColumnName("Freight").IsOptional().HasColumnType("money").HasPrecision(19,4);
+            builder.Property(x => x.ShipName).HasColumnName("ShipName").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ShipAddress).HasColumnName("ShipAddress").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(60);
+            builder.Property(x => x.ShipCity).HasColumnName("ShipCity").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ShipRegion).HasColumnName("ShipRegion").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ShipPostalCode).HasColumnName("ShipPostalCode").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(10);
+            builder.Property(x => x.ShipCountry).HasColumnName("ShipCountry").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsRequired(false).HasColumnType("nchar").HasMaxLength(5);
+            builder.Property(x => x.CustomerName).HasColumnName("CustomerName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.Address).HasColumnName("Address").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(60);
+            builder.Property(x => x.City).HasColumnName("City").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.Region).HasColumnName("Region").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(10);
+            builder.Property(x => x.Country).HasColumnName("Country").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.Salesperson).HasColumnName("Salesperson").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(31);
+            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.OrderDate).HasColumnName("OrderDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.RequiredDate).HasColumnName("RequiredDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.ShipperName).HasColumnName("ShipperName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired(true).HasColumnType("money(19,4)");
+            builder.Property(x => x.Quantity).HasColumnName("Quantity").IsRequired(true).HasColumnType("smallint");
+            builder.Property(x => x.Discount).HasColumnName("Discount").IsRequired(true).HasColumnType("real");
+            builder.Property(x => x.ExtendedPrice).HasColumnName("ExtendedPrice").IsRequired(false).HasColumnType("money(19,4)");
+            builder.Property(x => x.Freight).HasColumnName("Freight").IsRequired(false).HasColumnType("money(19,4)");
         }
     }
 
     // Orders
-    public class OrderConfiguration : EntityTypeConfiguration<Order>
+    public class OrderConfiguration : MyDbContext.EntityTypeConfiguration<Order>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Order> builder, string schema)
@@ -1547,30 +1563,30 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Orders", schema);
             builder.HasKey(x => x.OrderId);
 
-            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsOptional().IsFixedLength().HasColumnType("nchar").HasMaxLength(5);
-            builder.Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsOptional().HasColumnType("int");
-            builder.Property(x => x.OrderDate).HasColumnName("OrderDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.RequiredDate).HasColumnName("RequiredDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.ShipVia).HasColumnName("ShipVia").IsOptional().HasColumnType("int");
-            builder.Property(x => x.Freight).HasColumnName("Freight").IsOptional().HasColumnType("money").HasPrecision(19,4);
-            builder.Property(x => x.ShipName).HasColumnName("ShipName").IsOptional().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ShipAddress).HasColumnName("ShipAddress").IsOptional().HasColumnType("nvarchar").HasMaxLength(60);
-            builder.Property(x => x.ShipCity).HasColumnName("ShipCity").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.ShipRegion).HasColumnName("ShipRegion").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.ShipPostalCode).HasColumnName("ShipPostalCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
-            builder.Property(x => x.ShipCountry).HasColumnName("ShipCountry").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired(true).HasColumnType("int").ValueGeneratedOnAdd();
+            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsRequired(false).HasColumnType("nchar").HasMaxLength(5);
+            builder.Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsRequired(false).HasColumnType("int");
+            builder.Property(x => x.OrderDate).HasColumnName("OrderDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.RequiredDate).HasColumnName("RequiredDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.ShipVia).HasColumnName("ShipVia").IsRequired(false).HasColumnType("int");
+            builder.Property(x => x.Freight).HasColumnName("Freight").IsRequired(false).HasColumnType("money(19,4)");
+            builder.Property(x => x.ShipName).HasColumnName("ShipName").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ShipAddress).HasColumnName("ShipAddress").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(60);
+            builder.Property(x => x.ShipCity).HasColumnName("ShipCity").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ShipRegion).HasColumnName("ShipRegion").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ShipPostalCode).HasColumnName("ShipPostalCode").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(10);
+            builder.Property(x => x.ShipCountry).HasColumnName("ShipCountry").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
 
             // Foreign keys
-            builder.HasOptional(a => a.Customer).WithMany(b => b.Orders).HasForeignKey(c => c.CustomerId); // FK_Orders_Customers
-            builder.HasOptional(a => a.Employee).WithMany(b => b.Orders).HasForeignKey(c => c.EmployeeId); // FK_Orders_Employees
-            builder.HasOptional(a => a.Shipper).WithMany(b => b.Orders).HasForeignKey(c => c.ShipVia); // FK_Orders_Shippers
+            builder.HasOne(a => a.Customer).WithMany(b => b.Orders).HasForeignKey(c => c.CustomerId); // FK_Orders_Customers
+            builder.HasOne(a => a.Employee).WithMany(b => b.Orders).HasForeignKey(c => c.EmployeeId); // FK_Orders_Employees
+            builder.HasOne(a => a.Shipper).WithMany(b => b.Orders).HasForeignKey(c => c.ShipVia); // FK_Orders_Shippers
         }
     }
 
     // Order Details
-    public class OrderDetailConfiguration : EntityTypeConfiguration<OrderDetail>
+    public class OrderDetailConfiguration : MyDbContext.EntityTypeConfiguration<OrderDetail>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<OrderDetail> builder, string schema)
@@ -1578,20 +1594,20 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Order Details", schema);
             builder.HasKey(x => new { x.OrderId, x.ProductId });
 
-            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired().HasColumnType("money").HasPrecision(19,4);
-            builder.Property(x => x.Quantity).HasColumnName("Quantity").IsRequired().HasColumnType("smallint");
-            builder.Property(x => x.Discount).HasColumnName("Discount").IsRequired().HasColumnType("real");
+            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired(true).HasColumnType("int").ValueGeneratedNever();
+            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired(true).HasColumnType("int").ValueGeneratedNever();
+            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired(true).HasColumnType("money(19,4)");
+            builder.Property(x => x.Quantity).HasColumnName("Quantity").IsRequired(true).HasColumnType("smallint");
+            builder.Property(x => x.Discount).HasColumnName("Discount").IsRequired(true).HasColumnType("real");
 
             // Foreign keys
-            builder.HasRequired(a => a.Order).WithMany(b => b.OrderDetails).HasForeignKey(c => c.OrderId); // FK_Order_Details_Orders
-            builder.HasRequired(a => a.Product).WithMany(b => b.OrderDetails).HasForeignKey(c => c.ProductId); // FK_Order_Details_Products
+            builder.HasOne(a => a.Order).WithMany(b => b.OrderDetails).HasForeignKey(c => c.OrderId); // FK_Order_Details_Orders
+            builder.HasOne(a => a.Product).WithMany(b => b.OrderDetails).HasForeignKey(c => c.ProductId); // FK_Order_Details_Products
         }
     }
 
     // Order Details Extended
-    public class OrderDetailsExtendedConfiguration : EntityTypeConfiguration<OrderDetailsExtended>
+    public class OrderDetailsExtendedConfiguration : MyDbContext.EntityTypeConfiguration<OrderDetailsExtended>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<OrderDetailsExtended> builder, string schema)
@@ -1599,18 +1615,18 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Order Details Extended", schema);
             builder.HasKey(x => new { x.OrderId, x.ProductId, x.ProductName, x.UnitPrice, x.Quantity, x.Discount });
 
-            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired().HasColumnType("money").HasPrecision(19,4);
-            builder.Property(x => x.Quantity).HasColumnName("Quantity").IsRequired().HasColumnType("smallint");
-            builder.Property(x => x.Discount).HasColumnName("Discount").IsRequired().HasColumnType("real");
-            builder.Property(x => x.ExtendedPrice).HasColumnName("ExtendedPrice").IsOptional().HasColumnType("money").HasPrecision(19,4);
+            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired(true).HasColumnType("money(19,4)");
+            builder.Property(x => x.Quantity).HasColumnName("Quantity").IsRequired(true).HasColumnType("smallint");
+            builder.Property(x => x.Discount).HasColumnName("Discount").IsRequired(true).HasColumnType("real");
+            builder.Property(x => x.ExtendedPrice).HasColumnName("ExtendedPrice").IsRequired(false).HasColumnType("money(19,4)");
         }
     }
 
     // Orders Qry
-    public class OrdersQryConfiguration : EntityTypeConfiguration<OrdersQry>
+    public class OrdersQryConfiguration : MyDbContext.EntityTypeConfiguration<OrdersQry>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<OrdersQry> builder, string schema)
@@ -1618,31 +1634,31 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Orders Qry", schema);
             builder.HasKey(x => new { x.OrderId, x.CompanyName });
 
-            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsOptional().IsFixedLength().HasColumnType("nchar").HasMaxLength(5);
-            builder.Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsOptional().HasColumnType("int");
-            builder.Property(x => x.OrderDate).HasColumnName("OrderDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.RequiredDate).HasColumnName("RequiredDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.ShipVia).HasColumnName("ShipVia").IsOptional().HasColumnType("int");
-            builder.Property(x => x.Freight).HasColumnName("Freight").IsOptional().HasColumnType("money").HasPrecision(19,4);
-            builder.Property(x => x.ShipName).HasColumnName("ShipName").IsOptional().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ShipAddress).HasColumnName("ShipAddress").IsOptional().HasColumnType("nvarchar").HasMaxLength(60);
-            builder.Property(x => x.ShipCity).HasColumnName("ShipCity").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.ShipRegion).HasColumnName("ShipRegion").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.ShipPostalCode).HasColumnName("ShipPostalCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
-            builder.Property(x => x.ShipCountry).HasColumnName("ShipCountry").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.Address).HasColumnName("Address").IsOptional().HasColumnType("nvarchar").HasMaxLength(60);
-            builder.Property(x => x.City).HasColumnName("City").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.Region).HasColumnName("Region").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
-            builder.Property(x => x.Country).HasColumnName("Country").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.CustomerId).HasColumnName("CustomerID").IsRequired(false).HasColumnType("nchar").HasMaxLength(5);
+            builder.Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsRequired(false).HasColumnType("int");
+            builder.Property(x => x.OrderDate).HasColumnName("OrderDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.RequiredDate).HasColumnName("RequiredDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.ShipVia).HasColumnName("ShipVia").IsRequired(false).HasColumnType("int");
+            builder.Property(x => x.Freight).HasColumnName("Freight").IsRequired(false).HasColumnType("money(19,4)");
+            builder.Property(x => x.ShipName).HasColumnName("ShipName").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ShipAddress).HasColumnName("ShipAddress").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(60);
+            builder.Property(x => x.ShipCity).HasColumnName("ShipCity").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ShipRegion).HasColumnName("ShipRegion").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ShipPostalCode).HasColumnName("ShipPostalCode").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(10);
+            builder.Property(x => x.ShipCountry).HasColumnName("ShipCountry").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.Address).HasColumnName("Address").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(60);
+            builder.Property(x => x.City).HasColumnName("City").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.Region).HasColumnName("Region").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(10);
+            builder.Property(x => x.Country).HasColumnName("Country").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
         }
     }
 
     // Order Subtotals
-    public class OrderSubtotalConfiguration : EntityTypeConfiguration<OrderSubtotal>
+    public class OrderSubtotalConfiguration : MyDbContext.EntityTypeConfiguration<OrderSubtotal>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<OrderSubtotal> builder, string schema)
@@ -1650,13 +1666,13 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Order Subtotals", schema);
             builder.HasKey(x => x.OrderId);
 
-            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.Subtotal).HasColumnName("Subtotal").IsOptional().HasColumnType("money").HasPrecision(19,4);
+            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.Subtotal).HasColumnName("Subtotal").IsRequired(false).HasColumnType("money(19,4)");
         }
     }
 
     // Products
-    public class ProductConfiguration : EntityTypeConfiguration<Product>
+    public class ProductConfiguration : MyDbContext.EntityTypeConfiguration<Product>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Product> builder, string schema)
@@ -1664,25 +1680,25 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Products", schema);
             builder.HasKey(x => x.ProductId);
 
-            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.SupplierId).HasColumnName("SupplierID").IsOptional().HasColumnType("int");
-            builder.Property(x => x.CategoryId).HasColumnName("CategoryID").IsOptional().HasColumnType("int");
-            builder.Property(x => x.QuantityPerUnit).HasColumnName("QuantityPerUnit").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
-            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsOptional().HasColumnType("money").HasPrecision(19,4);
-            builder.Property(x => x.UnitsInStock).HasColumnName("UnitsInStock").IsOptional().HasColumnType("smallint");
-            builder.Property(x => x.UnitsOnOrder).HasColumnName("UnitsOnOrder").IsOptional().HasColumnType("smallint");
-            builder.Property(x => x.ReorderLevel).HasColumnName("ReorderLevel").IsOptional().HasColumnType("smallint");
-            builder.Property(x => x.Discontinued).HasColumnName("Discontinued").IsRequired().HasColumnType("bit");
+            builder.Property(x => x.ProductId).HasColumnName("ProductID").IsRequired(true).HasColumnType("int").ValueGeneratedOnAdd();
+            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.SupplierId).HasColumnName("SupplierID").IsRequired(false).HasColumnType("int");
+            builder.Property(x => x.CategoryId).HasColumnName("CategoryID").IsRequired(false).HasColumnType("int");
+            builder.Property(x => x.QuantityPerUnit).HasColumnName("QuantityPerUnit").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(20);
+            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired(false).HasColumnType("money(19,4)");
+            builder.Property(x => x.UnitsInStock).HasColumnName("UnitsInStock").IsRequired(false).HasColumnType("smallint");
+            builder.Property(x => x.UnitsOnOrder).HasColumnName("UnitsOnOrder").IsRequired(false).HasColumnType("smallint");
+            builder.Property(x => x.ReorderLevel).HasColumnName("ReorderLevel").IsRequired(false).HasColumnType("smallint");
+            builder.Property(x => x.Discontinued).HasColumnName("Discontinued").IsRequired(true).HasColumnType("bit");
 
             // Foreign keys
-            builder.HasOptional(a => a.Category).WithMany(b => b.Products).HasForeignKey(c => c.CategoryId); // FK_Products_Categories
-            builder.HasOptional(a => a.Supplier).WithMany(b => b.Products).HasForeignKey(c => c.SupplierId); // FK_Products_Suppliers
+            builder.HasOne(a => a.Category).WithMany(b => b.Products).HasForeignKey(c => c.CategoryId); // FK_Products_Categories
+            builder.HasOne(a => a.Supplier).WithMany(b => b.Products).HasForeignKey(c => c.SupplierId); // FK_Products_Suppliers
         }
     }
 
     // Products Above Average Price
-    public class ProductsAboveAveragePriceConfiguration : EntityTypeConfiguration<ProductsAboveAveragePrice>
+    public class ProductsAboveAveragePriceConfiguration : MyDbContext.EntityTypeConfiguration<ProductsAboveAveragePrice>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<ProductsAboveAveragePrice> builder, string schema)
@@ -1690,13 +1706,13 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Products Above Average Price", schema);
             builder.HasKey(x => x.ProductName);
 
-            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsOptional().HasColumnType("money").HasPrecision(19,4);
+            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired(false).HasColumnType("money(19,4)");
         }
     }
 
     // Product Sales for 1997
-    public class ProductSalesFor1997Configuration : EntityTypeConfiguration<ProductSalesFor1997>
+    public class ProductSalesFor1997Configuration : MyDbContext.EntityTypeConfiguration<ProductSalesFor1997>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<ProductSalesFor1997> builder, string schema)
@@ -1704,14 +1720,14 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Product Sales for 1997", schema);
             builder.HasKey(x => new { x.CategoryName, x.ProductName });
 
-            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ProductSales).HasColumnName("ProductSales").IsOptional().HasColumnType("money").HasPrecision(19,4);
+            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ProductSales).HasColumnName("ProductSales").IsRequired(false).HasColumnType("money(19,4)");
         }
     }
 
     // Products by Category
-    public class ProductsByCategoryConfiguration : EntityTypeConfiguration<ProductsByCategory>
+    public class ProductsByCategoryConfiguration : MyDbContext.EntityTypeConfiguration<ProductsByCategory>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<ProductsByCategory> builder, string schema)
@@ -1719,16 +1735,16 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Products by Category", schema);
             builder.HasKey(x => new { x.CategoryName, x.ProductName, x.Discontinued });
 
-            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.QuantityPerUnit).HasColumnName("QuantityPerUnit").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
-            builder.Property(x => x.UnitsInStock).HasColumnName("UnitsInStock").IsOptional().HasColumnType("smallint");
-            builder.Property(x => x.Discontinued).HasColumnName("Discontinued").IsRequired().HasColumnType("bit");
+            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.QuantityPerUnit).HasColumnName("QuantityPerUnit").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(20);
+            builder.Property(x => x.UnitsInStock).HasColumnName("UnitsInStock").IsRequired(false).HasColumnType("smallint");
+            builder.Property(x => x.Discontinued).HasColumnName("Discontinued").IsRequired(true).HasColumnType("bit");
         }
     }
 
     // Region
-    public class RegionConfiguration : EntityTypeConfiguration<Region>
+    public class RegionConfiguration : MyDbContext.EntityTypeConfiguration<Region>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Region> builder, string schema)
@@ -1736,13 +1752,13 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Region", schema);
             builder.HasKey(x => x.RegionId);
 
-            builder.Property(x => x.RegionId).HasColumnName("RegionID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            builder.Property(x => x.RegionDescription).HasColumnName("RegionDescription").IsRequired().IsFixedLength().HasColumnType("nchar").HasMaxLength(50);
+            builder.Property(x => x.RegionId).HasColumnName("RegionID").IsRequired(true).HasColumnType("int").ValueGeneratedNever();
+            builder.Property(x => x.RegionDescription).HasColumnName("RegionDescription").IsRequired(true).HasColumnType("nchar").HasMaxLength(50);
         }
     }
 
     // Sales by Category
-    public class SalesByCategoryConfiguration : EntityTypeConfiguration<SalesByCategory>
+    public class SalesByCategoryConfiguration : MyDbContext.EntityTypeConfiguration<SalesByCategory>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<SalesByCategory> builder, string schema)
@@ -1750,15 +1766,15 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Sales by Category", schema);
             builder.HasKey(x => new { x.CategoryId, x.CategoryName, x.ProductName });
 
-            builder.Property(x => x.CategoryId).HasColumnName("CategoryID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ProductSales).HasColumnName("ProductSales").IsOptional().HasColumnType("money").HasPrecision(19,4);
+            builder.Property(x => x.CategoryId).HasColumnName("CategoryID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.ProductName).HasColumnName("ProductName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ProductSales).HasColumnName("ProductSales").IsRequired(false).HasColumnType("money(19,4)");
         }
     }
 
     // Sales Totals by Amount
-    public class SalesTotalsByAmountConfiguration : EntityTypeConfiguration<SalesTotalsByAmount>
+    public class SalesTotalsByAmountConfiguration : MyDbContext.EntityTypeConfiguration<SalesTotalsByAmount>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<SalesTotalsByAmount> builder, string schema)
@@ -1766,15 +1782,15 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Sales Totals by Amount", schema);
             builder.HasKey(x => new { x.OrderId, x.CompanyName });
 
-            builder.Property(x => x.SaleAmount).HasColumnName("SaleAmount").IsOptional().HasColumnType("money").HasPrecision(19,4);
-            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional().HasColumnType("datetime");
+            builder.Property(x => x.SaleAmount).HasColumnName("SaleAmount").IsRequired(false).HasColumnType("money(19,4)");
+            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsRequired(false).HasColumnType("datetime");
         }
     }
 
     // Shippers
-    public class ShipperConfiguration : EntityTypeConfiguration<Shipper>
+    public class ShipperConfiguration : MyDbContext.EntityTypeConfiguration<Shipper>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Shipper> builder, string schema)
@@ -1782,14 +1798,14 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Shippers", schema);
             builder.HasKey(x => x.ShipperId);
 
-            builder.Property(x => x.ShipperId).HasColumnName("ShipperID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.Phone).HasColumnName("Phone").IsOptional().HasColumnType("nvarchar").HasMaxLength(24);
+            builder.Property(x => x.ShipperId).HasColumnName("ShipperID").IsRequired(true).HasColumnType("int").ValueGeneratedOnAdd();
+            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.Phone).HasColumnName("Phone").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(24);
         }
     }
 
     // Summary of Sales by Quarter
-    public class SummaryOfSalesByQuarterConfiguration : EntityTypeConfiguration<SummaryOfSalesByQuarter>
+    public class SummaryOfSalesByQuarterConfiguration : MyDbContext.EntityTypeConfiguration<SummaryOfSalesByQuarter>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<SummaryOfSalesByQuarter> builder, string schema)
@@ -1797,14 +1813,14 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Summary of Sales by Quarter", schema);
             builder.HasKey(x => x.OrderId);
 
-            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.Subtotal).HasColumnName("Subtotal").IsOptional().HasColumnType("money").HasPrecision(19,4);
+            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.Subtotal).HasColumnName("Subtotal").IsRequired(false).HasColumnType("money(19,4)");
         }
     }
 
     // Summary of Sales by Year
-    public class SummaryOfSalesByYearConfiguration : EntityTypeConfiguration<SummaryOfSalesByYear>
+    public class SummaryOfSalesByYearConfiguration : MyDbContext.EntityTypeConfiguration<SummaryOfSalesByYear>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<SummaryOfSalesByYear> builder, string schema)
@@ -1812,14 +1828,14 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Summary of Sales by Year", schema);
             builder.HasKey(x => x.OrderId);
 
-            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional().HasColumnType("datetime");
-            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasColumnType("int");
-            builder.Property(x => x.Subtotal).HasColumnName("Subtotal").IsOptional().HasColumnType("money").HasPrecision(19,4);
+            builder.Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsRequired(false).HasColumnType("datetime");
+            builder.Property(x => x.OrderId).HasColumnName("OrderID").IsRequired(true).HasColumnType("int");
+            builder.Property(x => x.Subtotal).HasColumnName("Subtotal").IsRequired(false).HasColumnType("money(19,4)");
         }
     }
 
     // Suppliers
-    public class SupplierConfiguration : EntityTypeConfiguration<Supplier>
+    public class SupplierConfiguration : MyDbContext.EntityTypeConfiguration<Supplier>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Supplier> builder, string schema)
@@ -1827,23 +1843,23 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Suppliers", schema);
             builder.HasKey(x => x.SupplierId);
 
-            builder.Property(x => x.SupplierId).HasColumnName("SupplierID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasColumnType("nvarchar").HasMaxLength(40);
-            builder.Property(x => x.ContactName).HasColumnName("ContactName").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
-            builder.Property(x => x.ContactTitle).HasColumnName("ContactTitle").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
-            builder.Property(x => x.Address).HasColumnName("Address").IsOptional().HasColumnType("nvarchar").HasMaxLength(60);
-            builder.Property(x => x.City).HasColumnName("City").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.Region).HasColumnName("Region").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
-            builder.Property(x => x.Country).HasColumnName("Country").IsOptional().HasColumnType("nvarchar").HasMaxLength(15);
-            builder.Property(x => x.Phone).HasColumnName("Phone").IsOptional().HasColumnType("nvarchar").HasMaxLength(24);
-            builder.Property(x => x.Fax).HasColumnName("Fax").IsOptional().HasColumnType("nvarchar").HasMaxLength(24);
-            builder.Property(x => x.HomePage).HasColumnName("HomePage").IsOptional().HasColumnType("ntext").IsMaxLength();
+            builder.Property(x => x.SupplierId).HasColumnName("SupplierID").IsRequired(true).HasColumnType("int").ValueGeneratedOnAdd();
+            builder.Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(40);
+            builder.Property(x => x.ContactName).HasColumnName("ContactName").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(30);
+            builder.Property(x => x.ContactTitle).HasColumnName("ContactTitle").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(30);
+            builder.Property(x => x.Address).HasColumnName("Address").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(60);
+            builder.Property(x => x.City).HasColumnName("City").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.Region).HasColumnName("Region").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.PostalCode).HasColumnName("PostalCode").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(10);
+            builder.Property(x => x.Country).HasColumnName("Country").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(15);
+            builder.Property(x => x.Phone).HasColumnName("Phone").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(24);
+            builder.Property(x => x.Fax).HasColumnName("Fax").IsRequired(false).HasColumnType("nvarchar").HasMaxLength(24);
+            builder.Property(x => x.HomePage).HasColumnName("HomePage").IsRequired(false).HasColumnType("ntext");
         }
     }
 
     // Territories
-    public class TerritoryConfiguration : EntityTypeConfiguration<Territory>
+    public class TerritoryConfiguration : MyDbContext.EntityTypeConfiguration<Territory>
     {
  
         public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<Territory> builder, string schema)
@@ -1851,12 +1867,12 @@ namespace EntityFramework_Reverse_POCO_Generator
             builder.ToTable("Territories", schema);
             builder.HasKey(x => x.TerritoryId);
 
-            builder.Property(x => x.TerritoryId).HasColumnName("TerritoryID").IsRequired().HasColumnType("nvarchar").HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            builder.Property(x => x.TerritoryDescription).HasColumnName("TerritoryDescription").IsRequired().IsFixedLength().HasColumnType("nchar").HasMaxLength(50);
-            builder.Property(x => x.RegionId).HasColumnName("RegionID").IsRequired().HasColumnType("int");
+            builder.Property(x => x.TerritoryId).HasColumnName("TerritoryID").IsRequired(true).HasColumnType("nvarchar").HasMaxLength(20).ValueGeneratedNever();
+            builder.Property(x => x.TerritoryDescription).HasColumnName("TerritoryDescription").IsRequired(true).HasColumnType("nchar").HasMaxLength(50);
+            builder.Property(x => x.RegionId).HasColumnName("RegionID").IsRequired(true).HasColumnType("int");
 
             // Foreign keys
-            builder.HasRequired(a => a.Region).WithMany(b => b.Territories).HasForeignKey(c => c.RegionId); // FK_Territories_Region
+            builder.HasOne(a => a.Region).WithMany(b => b.Territories).HasForeignKey(c => c.RegionId); // FK_Territories_Region
         }
     }
 
@@ -1917,106 +1933,6 @@ namespace EntityFramework_Reverse_POCO_Generator
         public System.Decimal? UnitPrice { get; set; }
     }
 
-
-    // ************************************************************************
-    // Helper Classes
-
-    internal interface EntityTypeConfiguration<TEntity> where TEntity : class
-    {
-        void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<TEntity> typeBuilder, string schema);
-    }
-
-    internal static class EF7Helper
-    {//see https://github.com/aspnet/EntityFramework/wiki/Entity-Framework-Design-Meeting-Notes-June-5,-2014#decision-property-facet-apis
-        public static void Add<TEntity>(this ModelBuilder builder, EntityTypeConfiguration<TEntity> cfg, string schema = "dbo")
-            where TEntity : class
-        {
-            builder.Entity<TEntity>(etb => cfg.Config(etb, schema));
-        }
-
-        public static PropertyBuilder<TProperty> IsOptional<TProperty>(this PropertyBuilder<TProperty> builder)
-        {
-            return builder.IsRequired(false);
-        }
-
-        public static PropertyBuilder<TProperty> IsUnicode<TProperty>(this PropertyBuilder<TProperty> builder, bool unicode)
-        {
-            return builder;
-        }
-
-        public static PropertyBuilder<TProperty> IsFixedLength<TProperty>(this PropertyBuilder<TProperty> builder)
-        {
-            return builder;
-        }
-
-        public static PropertyBuilder<TProperty> IsMaxLength<TProperty>(this PropertyBuilder<TProperty> builder)
-        {
-            return builder;
-        }
-
-        public static ReferenceNavigationBuilder<TEntity, TRelatedEntity> HasRequired<TEntity, TRelatedEntity>(
-            this EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, TRelatedEntity>> reference = null)
-            where TEntity : class
-            where TRelatedEntity : class
-        {
-            return builder.HasOne(reference);
-        }
-
-        public static ReferenceNavigationBuilder<TEntity, TRelatedEntity> HasOptional<TEntity, TRelatedEntity>(
-            this EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, TRelatedEntity>> reference = null)
-            where TEntity : class
-            where TRelatedEntity : class
-        {
-            return builder.HasOne(reference);
-        }
-
-        public static ReferenceReferenceBuilder<TEntity, TRelatedEntity> WithOptional<TEntity, TRelatedEntity>(
-            this ReferenceNavigationBuilder<TEntity, TRelatedEntity> builder, Expression<Func<TRelatedEntity, TEntity>> reference = null)
-            where TEntity : class
-            where TRelatedEntity : class
-        {
-            return builder.WithOne(reference);
-        }
-
-#if false
-        public static CollectionNavigationBuilder<TEntity, TRelatedEntity> WithMany<TEntity, TRelatedEntity>(
-            this CollectionNavigationBuilder<TEntity, TRelatedEntity> builder, Expression<Func<TRelatedEntity, System.Collections.Generic.IEnumerable<TEntity>>> reference = null)
-            where TEntity : class
-            where TRelatedEntity : class
-        {
-            //var innerBuilder = ((Microsoft.Data.Entity.Infrastructure.IInfrastructure<Microsoft.Data.Entity.Metadata.Internal.InternalRelationshipBuilder>)builder).Instance;
-
-            //return innerBuilder.PrincipalEntityType(builder.RelatedEntityType, Microsoft.Data.Entity.Metadata.Internal.ConfigurationSource.Explicit)
-            //    .IsUnique(false, Microsoft.Data.Entity.Metadata.Internal.ConfigurationSource.Explicit)
-            //    .PrincipalToDependent(collection, Microsoft.Data.Entity.Metadata.Internal.ConfigurationSource.Explicit);
-            //TODO: link to another table
-            return builder;
-        }
-#endif
-
-        public static PropertyBuilder<TProperty> HasPrecision<TProperty>(this PropertyBuilder<TProperty> builder, byte precision, byte scale)
-        {
-            //for decimal/Nullable<decimal>
-            //TODO: (precision, scale)
-            return builder;
-        }
-
-        public static PropertyBuilder<TProperty> HasDatabaseGeneratedOption<TProperty>(
-            this PropertyBuilder<TProperty> builder, DatabaseGeneratedOption option)
-        {
-            switch (option)
-            {
-                case DatabaseGeneratedOption.None:
-                    return builder.ValueGeneratedNever();
-                case DatabaseGeneratedOption.Computed:
-                    return builder.ValueGeneratedOnAddOrUpdate();
-                case DatabaseGeneratedOption.Identity:
-                    return builder.ValueGeneratedOnAdd();
-                default:
-                    throw new ArgumentException("option");
-            }
-        }
-    }
 }
 // </auto-generated>
 
