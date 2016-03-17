@@ -389,6 +389,7 @@ namespace EntityFramework_Reverse_POCO_Generator
 
         // Table Valued Functions
     }
+#warning AddUnitTestingDbContext is not really work with EF7
 
     // ************************************************************************
     // Fake Database context
@@ -581,6 +582,7 @@ namespace EntityFramework_Reverse_POCO_Generator
 
         // Table Valued Functions
     }
+#warning AddUnitTestingDbContext is not really work with EF7
 
     // ************************************************************************
     // Fake DbSet

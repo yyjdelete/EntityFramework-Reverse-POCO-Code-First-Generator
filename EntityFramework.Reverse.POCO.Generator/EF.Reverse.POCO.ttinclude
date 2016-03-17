@@ -410,6 +410,7 @@ if (IncludeTableValuedFunctions)
     if (ElementsToGenerate.HasFlag(Elements.Context) && AddUnitTestingDbContext)
     {
         fileManager.StartNewFile("Fake" + DbContextName + FileExtension); #>
+#warning AddUnitTestingDbContext is not really work with EF7
 <# if (!GenerateSeparateFiles)
 { #>
 
@@ -529,6 +530,7 @@ if (IncludeTableValuedFunctions)
 }/**/#>
     }
 <#fileManager.StartNewFile("FakeDbSet" + FileExtension); #>
+#warning AddUnitTestingDbContext is not really work with EF7
 <# if(GenerateSeparateFiles) { #>
     using System.Linq;
 <# } #>
