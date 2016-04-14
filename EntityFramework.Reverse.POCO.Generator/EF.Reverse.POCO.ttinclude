@@ -72,6 +72,8 @@ foreach(var usingStatement in usingsAll.Distinct().OrderBy(x => x)) { #>
     fileManager.StartNewFile("I" + DbContextName + FileExtension);
     if (!GenerateSeparateFiles)
     { #>
+#warning We should just use InMemoryProvider for Test in EF7.
+#if false
     // ************************************************************************
     // Unit of work
 <# }#>
@@ -132,6 +134,7 @@ if (IncludeTableValuedFunctions)
 #>
 <# /**/} #>
     }
+#endif
 
 <# }
  if(!string.IsNullOrWhiteSpace(MigrationConfigurationFileName)) {
@@ -431,7 +434,8 @@ if (IncludeTableValuedFunctions)
     if (ElementsToGenerate.HasFlag(Elements.Context) && AddUnitTestingDbContext)
     {
         fileManager.StartNewFile("Fake" + DbContextName + FileExtension); #>
-#warning AddUnitTestingDbContext is not really work with EF7
+#warning We should just use InMemoryProvider for Test in EF7.
+#if false
 <# if (!GenerateSeparateFiles)
 { #>
 
@@ -550,8 +554,10 @@ if (IncludeTableValuedFunctions)
 }
 }/**/#>
     }
+#endif
 <#fileManager.StartNewFile("FakeDbSet" + FileExtension); #>
-#warning AddUnitTestingDbContext is not really work with EF7
+#warning We should just use InMemoryProvider for Test in EF7.
+#if false
 <# if(GenerateSeparateFiles) { #>
     using System.Linq;
 <# } #>
@@ -817,6 +823,7 @@ if (IncludeTableValuedFunctions)
             get { return _inner.Current; } 
         } 
     }
+#endif
 <# } #>
 <# }
  if(ElementsToGenerate.HasFlag(Elements.Poco)){
