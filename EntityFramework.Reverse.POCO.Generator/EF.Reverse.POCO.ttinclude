@@ -339,7 +339,9 @@ foreach (StoredProcedure sp in storedProcs.Where(s => !s.IsTVF))
             var exec = string.Format("[{0}].[{1}]", sp.Schema, sp.Name); #>
 <#= WriteStoredProcFunctionSetSqlParameters(sp, false) #>
             var procResultData = new <#= spReturnClassName #>();
-            var cmd = Database.Connection.CreateCommand();
+#warning I know it doesn't work.
+#if false
+            var cmd = Database.GetDbConnection().CreateCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "<#= exec #>";
 <#          foreach (var p in sp.Parameters.OrderBy(x => x.Ordinal))
@@ -349,7 +351,7 @@ foreach (StoredProcedure sp in storedProcs.Where(s => !s.IsTVF))
 
             try
             {
-                Database.Connection.Open();
+                Database.OpenConnection();
                 var reader = cmd.ExecuteReader();
                 var objectContext = ((Microsoft.Data.Entity.Infrastructure.IObjectContextAdapter) this).ObjectContext;
 
@@ -368,8 +370,11 @@ foreach (StoredProcedure sp in storedProcs.Where(s => !s.IsTVF))
             }
             finally
             {
-                Database.Connection.Close();
+                Database.CloseConnection();
             }
+#else
+            throw new System.NotSupportedException();
+#endif
 <# } #>
             return procResultData;
         }
