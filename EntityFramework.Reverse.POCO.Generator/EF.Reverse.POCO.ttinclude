@@ -73,7 +73,6 @@ foreach(var usingStatement in usingsAll.Distinct().OrderBy(x => x)) { #>
     if (!GenerateSeparateFiles)
     { #>
 #warning We should just use InMemoryProvider for Test in EF7.
-#if false
     // ************************************************************************
     // Unit of work
 <# }#>
@@ -134,7 +133,6 @@ if (IncludeTableValuedFunctions)
 #>
 <# /**/} #>
     }
-#endif
 
 <# }
  if(!string.IsNullOrWhiteSpace(MigrationConfigurationFileName)) {
