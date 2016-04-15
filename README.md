@@ -9,6 +9,8 @@ Tested with EntityFramework.Core 7.0.0-rc1-final
 5. __Use some helper classes, so support more than one Context in an project is not supported.__  
 6. __FakeDbContext may not works(Not tested).__ InMemoryProvider should be used for test in EF7.  
 7. Not work with many2many map.  
+8. May shouldn't depend on `EF6.Utility.CS.ttinclude`.  
+9. ***IMPORTANT***When used in dotnet core project(xproj), an `System.Runtime.Serialization.SerializationException` is thrown by `EnvDTE._Solution.FindProjectItem(String FileName)` for that `Microsoft.VisualStudio.ProjectSystem.VS.Implementation.Package.Automation.OAProjectItem` is not marked as serializable. Trying to looking for an fix for that. An workaround is use the generator at tradition project, and copy output files to dotnet core project.  
 
 ---
 
