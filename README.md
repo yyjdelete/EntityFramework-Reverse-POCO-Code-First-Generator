@@ -19,13 +19,12 @@ Tested with EntityFramework.Core 7.0.0-rc1-final
 **Beautifully generated code first code that is fully customisable**
 * Downloadable VSIX installer from the [visual studio gallery](https://visualstudiogallery.msdn.microsoft.com/ee4fcff9-0c4c-4179-afd9-7a2fb90f5838).
 ![Visual Studio Partner](https://i1.visualstudiogallery.msdn.s-msft.com/content/visualstudio/vsippartnerlogonew.png)
+* Watch the in-depth course at [pluralsight](https://app.pluralsight.com/library/courses/code-first-entity-framework-legacy-databases/table-of-contents) ![logo](http://www.simonhughes.co.uk/pluralsight-logo-tiny.png) I cover everything this generator can do, and show you step-by-step how to reverse engineer your database properly.
 
 ### Project Description
 
 Reverse engineers an existing database and generates Entity Framework Code
 First Poco classes, Configuration mappings and DbContext. Includes support for WCF.
-
-Watch the [tutorial video](http://visualstudiogallery.msdn.microsoft.com/ee4fcff9-0c4c-4179-afd9-7a2fb90f5838).
 
 Please note, this is not the Microsoft reverse generator.
 This is one I created to generate beautiful code-first code, as if I
@@ -86,6 +85,9 @@ If your database changes, simply re-save the `<database>.tt` file. That's it.
 A simple UI for the generator is available at
 [efreversepocoui.codeplex.com](https://efreversepocoui.codeplex.com/) which helps you
 to create a regex to filter your tables.
+
+## Editing TT (T4) Files
+To have full syntax highlighting and intellisense when editing TT files, I use the Resharper plugin ForTea. I can't imagine editing TT files without it.
 
 Regards,
 Simon Hughes
