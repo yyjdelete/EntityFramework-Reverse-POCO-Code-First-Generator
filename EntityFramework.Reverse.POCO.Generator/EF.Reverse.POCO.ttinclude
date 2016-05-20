@@ -17,8 +17,8 @@ fileManager.StartHeader();
 // TargetFrameworkVersion = <#=TargetFrameworkVersion #>
 #pragma warning disable 1591    //  Ignore "Missing XML Comment" warning
 
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq.Expressions;
@@ -82,7 +82,7 @@ foreach(var usingStatement in usingsAll.Distinct().OrderBy(x => x)) { #>
 foreach (Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-        Microsoft.Data.Entity.DbSet<<#=tbl.NameHumanCase #>> <#=Inflector.MakePlural(tbl.NameHumanCase) #> { get; set; }<#if (IncludeComments)
+        Microsoft.EntityFrameworkCore.DbSet<<#=tbl.NameHumanCase #>> <#=Inflector.MakePlural(tbl.NameHumanCase) #> { get; set; }<#if (IncludeComments)
 { #> // <#=tbl.Name #>
 <# }
 else
@@ -190,7 +190,7 @@ foreach(var usingStatement in usingsContext.Distinct().OrderBy(x => x)) { #>
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-        public Microsoft.Data.Entity.DbSet<<#=tbl.NameHumanCase#>> <#=Inflector.MakePlural(tbl.NameHumanCase)#> { get; set; }<#if(IncludeComments){#> // <#=tbl.Name#>
+        public Microsoft.EntityFrameworkCore.DbSet<<#=tbl.NameHumanCase#>> <#=Inflector.MakePlural(tbl.NameHumanCase)#> { get; set; }<#if(IncludeComments){#> // <#=tbl.Name#>
 <# } else { #>
 
 <# } #>
@@ -200,9 +200,9 @@ foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey
         static <#=DbContextName#>()
         {
 <#if(string.IsNullOrWhiteSpace(MigrationConfigurationFileName)) {#>
-            Microsoft.Data.Entity.Database.SetInitializer<<#=DbContextName#>>(null);
+            Microsoft.EntityFrameworkCore.Database.SetInitializer<<#=DbContextName#>>(null);
 <#} else {#>
-            Microsoft.Data.Entity.Database.SetInitializer(new Microsoft.Data.Entity.<#=MigrationStrategy#><<#=DbContextName#><#if (MigrationStrategy == "MigrateDatabaseToLatestVersion"){#>, <#=MigrationConfigurationFileName#><#}#>>());
+            Microsoft.EntityFrameworkCore.Database.SetInitializer(new Microsoft.EntityFrameworkCore.<#=MigrationStrategy#><<#=DbContextName#><#if (MigrationStrategy == "MigrateDatabaseToLatestVersion"){#>, <#=MigrationConfigurationFileName#><#}#>>());
 <#}#>
         }
 #endif
@@ -226,7 +226,7 @@ case "DropCreateDatabaseIfModelChanges":
 #>
 
 <#}#>
-            //Microsoft.Data.Entity.Database.SetInitializer(new <#=MigrationStrategy#><<#=DbContextName#><#if (MigrationStrategy == "MigrateDatabaseToLatestVersion"){#>, <#=MigrationConfigurationFileName#><#}#>>());
+            //Microsoft.EntityFrameworkCore.Database.SetInitializer(new <#=MigrationStrategy#><<#=DbContextName#><#if (MigrationStrategy == "MigrateDatabaseToLatestVersion"){#>, <#=MigrationConfigurationFileName#><#}#>>());
 <#}#>
 <#if(MakeClassesPartial) {#>            InitializePartial();
 <#}#>
@@ -240,7 +240,7 @@ case "DropCreateDatabaseIfModelChanges":
 <#}#>
         }
 
-        public <#=DbContextName#>(string connectionString, Microsoft.Data.Entity.Infrastructure.DbCompiledModel model)
+        public <#=DbContextName#>(string connectionString, Microsoft.EntityFrameworkCore.Infrastructure.DbCompiledModel model)
             : base(connectionString, model)
         {
 <#if(MakeClassesPartial) {#>            InitializePartial();
@@ -254,7 +254,7 @@ case "DropCreateDatabaseIfModelChanges":
 <#}#>
         }
 
-        public <#=DbContextName#>(Microsoft.Data.Common.DbConnection existingConnection, Microsoft.Data.Entity.Infrastructure.DbCompiledModel model, bool contextOwnsConnection)
+        public <#=DbContextName#>(Microsoft.Data.Common.DbConnection existingConnection, Microsoft.EntityFrameworkCore.Infrastructure.DbCompiledModel model, bool contextOwnsConnection)
             : base(existingConnection, model, contextOwnsConnection)
         {
 <#if(MakeClassesPartial) {#>            InitializePartial();
@@ -278,7 +278,7 @@ case "DropCreateDatabaseIfModelChanges":
         }
 
 <#}#>
-        protected override void OnModelCreating(Microsoft.Data.Entity.ModelBuilder modelBuilder)
+        protected override void OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 <# if(storedProcs.Any() && IncludeTableValuedFunctions)
@@ -303,7 +303,7 @@ foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey
 <#}#>
         }
 
-        public static Microsoft.Data.Entity.ModelBuilder CreateModel(Microsoft.Data.Entity.ModelBuilder modelBuilder, string schema)
+        public static Microsoft.EntityFrameworkCore.ModelBuilder CreateModel(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder, string schema)
         {
 <#
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
@@ -316,7 +316,7 @@ foreach(Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey
 <#if(MakeClassesPartial) {#>
 
         partial void InitializePartial();
-        partial void OnModelCreatingPartial(Microsoft.Data.Entity.ModelBuilder modelBuilder);
+        partial void OnModelCreatingPartial(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder);
 <#}#>
 <# if (storedProcs.Any())
 { #>
@@ -373,7 +373,7 @@ foreach (StoredProcedure sp in storedProcs.Where(s => !s.IsTVF))
             {
                 Database.OpenConnection();
                 var reader = cmd.ExecuteReader();
-                var objectContext = ((Microsoft.Data.Entity.Infrastructure.IObjectContextAdapter) this).ObjectContext;
+                var objectContext = ((Microsoft.EntityFrameworkCore.Infrastructure.IObjectContextAdapter) this).ObjectContext;
 
 <# int n = 0;
             var returnModelCount = sp.ReturnModels.Count;
@@ -421,12 +421,12 @@ if (IncludeTableValuedFunctions)
             string spExecName = WriteStoredProcFunctionName(sp);
             string spReturnClassName = WriteStoredProcReturnModelName(sp);
 #>
-        [Microsoft.Data.Entity.DbFunction("<#=DbContextName#>", "<#=sp.Name#>")]
+        [Microsoft.EntityFrameworkCore.DbFunction("<#=DbContextName#>", "<#=sp.Name#>")]
         [CodeFirstStoreFunctions.DbFunctionDetails(DatabaseSchema = "<#=sp.Schema#>")]
         public IQueryable<<#= spReturnClassName #>> <#= spExecName #>(<#=WriteStoredProcFunctionParams(sp, false)#>)
         {
 <#= WriteTableValuedFunctionDeclareSqlParameter(sp) #> 
-            return ((Microsoft.Data.Entity.Infrastructure.IObjectContextAdapter)this).ObjectContext.CreateQuery<<#=spReturnClassName#>>("[<#=DbContextName#>].[<#=sp.Name#>](<#= WriteStoredProcFunctionSqlAtParams(sp) #>)", <#= WriteTableValuedFunctionSqlParameterAnonymousArray(sp) #>);
+            return ((Microsoft.EntityFrameworkCore.Infrastructure.IObjectContextAdapter)this).ObjectContext.CreateQuery<<#=spReturnClassName#>>("[<#=DbContextName#>].[<#=sp.Name#>](<#= WriteStoredProcFunctionSqlAtParams(sp) #>)", <#= WriteTableValuedFunctionSqlParameterAnonymousArray(sp) #>);
         }
 <# } } } #>
 
@@ -434,7 +434,7 @@ if (IncludeTableValuedFunctions)
         // Helper Classes
         internal interface EntityTypeConfiguration<TEntity> where TEntity : class
         {
-            void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<TEntity> typeBuilder, string schema);
+            void Config(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<TEntity> typeBuilder, string schema);
         }
 
         private static class EF7Helper
@@ -466,7 +466,7 @@ if (IncludeTableValuedFunctions)
 foreach (Table tbl in from t in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase) select t)
 {
 #>
-        public Microsoft.Data.Entity.DbSet<<#=tbl.NameHumanCase #>> <#=Inflector.MakePlural(tbl.NameHumanCase) #> { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<<#=tbl.NameHumanCase #>> <#=Inflector.MakePlural(tbl.NameHumanCase) #> { get; set; }
 <# } #>
 
         public Fake<#=DbContextName #>()
@@ -560,7 +560,7 @@ if (IncludeTableValuedFunctions)
         string spExecNamespTvf = WriteStoredProcFunctionName(spTvf);
         string spReturnClassName = WriteStoredProcReturnModelName(spTvf);
 #>
-        [Microsoft.Data.Entity.DbFunction("<#=DbContextName#>", "<#=spTvf.Name#>")]
+        [Microsoft.EntityFrameworkCore.DbFunction("<#=DbContextName#>", "<#=spTvf.Name#>")]
         public IQueryable<<#= spReturnClassName #>> <#= spExecNamespTvf #>(<#=WriteStoredProcFunctionParams(spTvf, false)#>)
         {
             return new System.Collections.Generic.List<<#= spReturnClassName #>>().AsQueryable();
@@ -597,7 +597,7 @@ if (IncludeTableValuedFunctions)
     //      }
     //      Read more about it here: https://msdn.microsoft.com/en-us/data/dn314431.aspx
     <#= CodeGeneratedAttribute #>
-    public <# if(MakeClassesPartial) { #>partial <# } #>class FakeDbSet<TEntity> : Microsoft.Data.Entity.DbSet<TEntity>, IQueryable, System.Collections.Generic.IEnumerable<TEntity><# if (IsSupportedFrameworkVersion("4.5")) { #>, Microsoft.Data.Entity.Query.Internal.IAsyncEnumerableAccessor<TEntity><# } #>, Microsoft.Data.Entity.Infrastructure.IInfrastructure<IServiceProvider> where TEntity : class 
+    public <# if(MakeClassesPartial) { #>partial <# } #>class FakeDbSet<TEntity> : Microsoft.EntityFrameworkCore.DbSet<TEntity>, IQueryable, System.Collections.Generic.IEnumerable<TEntity><# if (IsSupportedFrameworkVersion("4.5")) { #>, Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity><# } #>, Microsoft.EntityFrameworkCore.Infrastructure.IInfrastructure<IServiceProvider> where TEntity : class 
     {
 #warning This won't works.
         private readonly System.Reflection.PropertyInfo[] _primaryKeys;
@@ -623,7 +623,7 @@ if (IncludeTableValuedFunctions)
             InitializePartial();
 <#}#>        }
 
-        System.Collections.Generic.IAsyncEnumerable<TEntity> Microsoft.Data.Entity.Query.Internal.IAsyncEnumerableAccessor<TEntity>.AsyncEnumerable
+        System.Collections.Generic.IAsyncEnumerable<TEntity> Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.AsyncEnumerable
         {
             get
             {
@@ -650,7 +650,7 @@ if (IncludeTableValuedFunctions)
 <# } #>
         } 
 
-        IServiceProvider Microsoft.Data.Entity.Infrastructure.IInfrastructure<IServiceProvider>.Instance
+        IServiceProvider Microsoft.EntityFrameworkCore.Infrastructure.IInfrastructure<IServiceProvider>.Instance
         {
             get
             {
@@ -658,7 +658,7 @@ if (IncludeTableValuedFunctions)
             }
         }
 
-        public override Microsoft.Data.Entity.ChangeTracking.EntityEntry<TEntity> Add(TEntity entity, GraphBehavior behavior = GraphBehavior.IncludeDependents)
+        public override Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TEntity> Add(TEntity entity, GraphBehavior behavior = GraphBehavior.IncludeDependents)
         {
             if (entity == null) throw new System.ArgumentNullException("entity");
             _data.Add(entity);
@@ -684,7 +684,7 @@ if (IncludeTableValuedFunctions)
             }
         }
 
-        public override Microsoft.Data.Entity.ChangeTracking.EntityEntry<TEntity> Attach(TEntity entity, GraphBehavior behavior = GraphBehavior.IncludeDependents)
+        public override Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TEntity> Attach(TEntity entity, GraphBehavior behavior = GraphBehavior.IncludeDependents)
         {
             return base.Attach(entity, behavior);
         }
@@ -699,7 +699,7 @@ if (IncludeTableValuedFunctions)
             base.AttachRange(entities);
         }
 
-        public override Microsoft.Data.Entity.ChangeTracking.EntityEntry<TEntity> Remove(TEntity entity)
+        public override Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TEntity> Remove(TEntity entity)
         {
             if (entity == null) throw new System.ArgumentNullException("entity");
             _data.Remove(entity);
@@ -725,7 +725,7 @@ if (IncludeTableValuedFunctions)
             }
         }
 
-        public override Microsoft.Data.Entity.ChangeTracking.EntityEntry<TEntity> Update(TEntity entity, GraphBehavior behavior = GraphBehavior.IncludeDependents)
+        public override Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TEntity> Update(TEntity entity, GraphBehavior behavior = GraphBehavior.IncludeDependents)
         {
             return base.Update(entity, behavior);
         }
@@ -756,7 +756,7 @@ if (IncludeTableValuedFunctions)
 { #>
 
     <#= CodeGeneratedAttribute #>
-    public class FakeDbAsyncQueryProvider<TEntity> : Microsoft.Data.Entity.Query.Internal.IAsyncQueryProvider 
+    public class FakeDbAsyncQueryProvider<TEntity> : Microsoft.EntityFrameworkCore.Query.Internal.IAsyncQueryProvider 
     { 
         private readonly IQueryProvider _inner; 
  
@@ -961,7 +961,7 @@ if(IncludeComments){#>    // <#=tbl.Name#>
     public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase + ConfigurationClassName#> : <#=DbContextName#>.EntityTypeConfiguration<<#=tbl.NameHumanCase#>>
     {
 
-        public void Config(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<<#=tbl.NameHumanCase#>> builder, string schema)
+        public void Config(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<<#=tbl.NameHumanCase#>> builder, string schema)
         {
             builder.ToTable("<#=tbl.Name#>", schema);
             builder.HasKey(<#=tbl.PrimaryKeyNameHumanCase()#>);
@@ -992,7 +992,7 @@ foreach (string s in tbl.MappingConfiguration)
             InitializePartial(builder, schema);
 <#}#>        }
 <#if(MakeClassesPartial) {#>
-        partial void InitializePartial(Microsoft.Data.Entity.Metadata.Builders.EntityTypeBuilder<<#=tbl.NameHumanCase#>> builder, string schema);
+        partial void InitializePartial(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<<#=tbl.NameHumanCase#>> builder, string schema);
 <#}#>    }
 
 <# } }
